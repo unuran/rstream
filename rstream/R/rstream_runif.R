@@ -160,10 +160,10 @@ setReplaceMethod("rstream.antithetic", "rstream.runif",
 
 ## rstream.sample
 ##    make a random sample
-setMethod("rstream.sample", c("rstream.runif","numeric"), 
+setMethod("rstream.sample", "rstream.runif",
           function(stream,n=1) .rstream.runif.sample(stream,n) )
 
-setMethod("r", c("rstream.runif","numeric"), 
+setMethod("r", "rstream.runif",
           function(stream,n=1) .rstream.runif.sample(stream,n) )
 
 .rstream.runif.sample <- 

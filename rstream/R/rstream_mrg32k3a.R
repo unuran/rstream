@@ -156,12 +156,12 @@ setReplaceMethod("rstream.incprecision", "rstream.mrg32k3a",
 
 ## rstream.sample
 ##    make a random sample
-setMethod("rstream.sample", c("rstream.mrg32k3a","numeric"), 
+setMethod("rstream.sample", "rstream.mrg32k3a",
           function(stream,n=1) { 
                   if (stream@is.packed) stop("Cannot sample from PACKED Rstream") 
                   .Call("R_RngStreams_Sample", stream@stream, as.integer(n), PACKAGE="rstream") } )
 
-setMethod("r", c("rstream.mrg32k3a","numeric"), 
+setMethod("r", "rstream.mrg32k3a",
           function(stream,n=1) { 
                   if (stream@is.packed) stop("Cannot sample from PACKED Rstream") 
                   .Call("R_RngStreams_Sample", stream@stream, as.integer(n), PACKAGE="rstream") } )

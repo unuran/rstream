@@ -99,7 +99,8 @@ setReplaceMethod("rstream.incprecision", "rstream",
 ##    make a random sample
 if(!isGeneric("rstream.sample"))
         setGeneric("rstream.sample", function(stream,...) standardGeneric("rstream.sample"))
-setMethod("rstream.sample", c("rstream","numeric"), 
+
+setMethod("rstream.sample", "rstream", 
           function(stream,n=1) { 
                   stop(class(stream)[1],": Cannot sample from this Rstream class")
                   NULL
@@ -110,7 +111,8 @@ setMethod("rstream.sample", c("rstream","numeric"),
 ##    alias for rstream.sample  (slow!!)
 if(!isGeneric("r"))
         setGeneric("r", function(stream,...) standardGeneric("r"))
-setMethod("r", c("rstream","numeric"), 
+
+setMethod("r", "rstream",
           function(stream,n=1) { rstream.sample(stream,n) } )
 
 
