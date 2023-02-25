@@ -121,7 +121,7 @@
     and substreams}. Operations Research 50(6), 1073-1075.
 }
 
-\author{Josef Leydold (leydold@statistik.wu-wien.ac.at)}
+\author{Josef Leydold (leydold@statmath.wu.ac.at)}
 
 \note{%
   "rstream" objects cannot simply be copied by \code{<-}. The new

@@ -124,7 +124,7 @@
 }
 
 \author{
-  Josef Leydold (leydold@statistik.wu-wien.ac.at)
+  Josef Leydold (leydold@statmath.wu.ac.at)
 
   underlying generator: Pierre L'Ecyuer and Richard Simard
 }

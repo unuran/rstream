@@ -43,7 +43,7 @@ For an overview of classes and methods, see
 \code{\link{rstream-class}}.
 }
 
-\author{Josef Leydold <leydold@statmath.wu-wien.ac.at>}
+\author{Josef Leydold <leydold@statmath.wu.ac.at>}
 
 \references{
   P. L'Ecuyer and J. Leydold (2005):
