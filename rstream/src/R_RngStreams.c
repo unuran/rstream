@@ -9,7 +9,7 @@
  *                                                                           *
  *****************************************************************************/
 
-/* $Id: R_RngStreams.c 10 2007-09-10 07:54:34Z leydold $ */
+/* $Id: R_RngStreams.c 22 2010-05-05 12:40:24Z leydold $ */
 
 /*---------------------------------------------------------------------------*/
 
@@ -26,21 +26,19 @@
 static void R_RngStreams_free (SEXP R_stream);
 /* Free Stream generator object. */
 
+static SEXP RngStreams_tag(void); 
+/* Make tag for R RngStream object [Contains static variable!] */
+
 /*---------------------------------------------------------------------------*/
 
 /* Check pointer to generator object */
 #define CHECK_STREAM_PTR(s) do { \
-    if (TYPEOF(s) != EXTPTRSXP || R_ExternalPtrTag(s) != RngStreams_tag) \
+    if (TYPEOF(s) != EXTPTRSXP || R_ExternalPtrTag(s) != RngStreams_tag()) \
         error("bad Stream object\n"); \
     } while (0)
 
 #define CHECK_NULL(s) do { \
     if ((s)==NULL) error("invalid NULL pointer in %s, line %d\n",__FILE__,__LINE__); } while(0)
-
-/*---------------------------------------------------------------------------*/
-
-/* Use an external reference to store the Stream generator objects */
-static SEXP RngStreams_tag = NULL;
 
 /*---------------------------------------------------------------------------*/
 
@@ -123,9 +121,6 @@ SEXP R_RngStreams_Init (SEXP R_obj, SEXP R_name)
   RngStream newstream;   /* Notice: RngStream is a pointer to a structure */
   const char *name;
 
-  /* make tag for R object */
-  if (!RngStreams_tag) RngStreams_tag = install("RNGSTREAMS_TAG");
-
   /* check argument */
   if (!R_name || TYPEOF(R_name) != STRSXP)
     error("bad string\n");
@@ -141,7 +136,7 @@ SEXP R_RngStreams_Init (SEXP R_obj, SEXP R_name)
     error("cannot create Stream object\n");
 
   /* make R external pointer and store pointer to Stream generator */
-  PROTECT(R_newstream = R_MakeExternalPtr(newstream, RngStreams_tag, R_obj));
+  PROTECT(R_newstream = R_MakeExternalPtr(newstream, RngStreams_tag(), R_obj));
   UNPROTECT(1);
   
   /* register destructor as C finalizer */
@@ -478,7 +473,7 @@ SEXP R_RngStreams_Clone (SEXP R_obj, SEXP R_stream, SEXP R_name)
   strncpy(clone->name, name, len+1);
 
   /* make R external pointer and store pointer to Stream generator */
-  PROTECT(R_clone = R_MakeExternalPtr(clone, RngStreams_tag, R_obj));
+  PROTECT(R_clone = R_MakeExternalPtr(clone, RngStreams_tag(), R_obj));
   UNPROTECT(1);
   
   /* register destructor as C finalizer */
@@ -622,7 +617,6 @@ SEXP R_RngStreams_SetData (SEXP R_obj, SEXP R_stream, SEXP R_stream_data, SEXP R
      /*----------------------------------------------------------------------*/
 {
   RngStream newstream;
-  SEXP R_newstream;
   const char *name;
   size_t len;
 
@@ -663,7 +657,9 @@ SEXP R_RngStreams_SetData (SEXP R_obj, SEXP R_stream, SEXP R_stream_data, SEXP R
   /* ... and reset the protector just in case R_obj is different from the */
   /*   orignal protector of R_stream                                      */
   R_SetExternalPtrProtected(R_stream, R_obj);
-    
+  /* update tag */
+  R_SetExternalPtrTag(R_stream, RngStreams_tag());
+
   /* There is no need to return an object to R */
   return R_NilValue;
 
@@ -696,5 +692,25 @@ SEXP R_RngStreams_setRNG (SEXP R_stream)
 
   return R_NilValue;
 } /* end of R_RngStreams_setRNG() */
+
+/*---------------------------------------------------------------------------*/
+
+SEXP RngStreams_tag(void) 
+     /*----------------------------------------------------------------------*/
+     /* Make tag for R RngStream object [Contains static variable!]          */
+     /*                                                                      */
+     /* Parameters: none                                                     */
+     /*                                                                      */
+     /* Return:                                                              */
+     /*   tag (R object)                                                     */ 
+     /*----------------------------------------------------------------------*/
+{
+  static SEXP tag = NULL;
+
+  /* make tag for R object */
+  if (!tag) tag = install("RNGSTREAMS_TAG");
+
+  return tag;
+} /* end RngStreams_tag() */
 
 /*---------------------------------------------------------------------------*/
