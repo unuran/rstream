@@ -1,4 +1,15 @@
 
+Version 1.3.1: 2011-05-10
+
+	- fixed warning in Rd file
+
+	- there is a small change that chi2 goodness-of-fit tests in
+          directory 'tests' fail. As the seed is set at random this
+          may occasionaly cause an ERROR when checking the package.
+	  This event has been made even more unlikely (while real
+          programming errors on new platforms should be detected).
+
+
 Version 1.3.0: 2011-02-10
 
 	- fixed bug: when rstream.RNG(s) was called with an 'rstream'

@@ -268,6 +268,36 @@ rstream.check.chi2 <- function (type, ...) {
         ##  type   ...  type (class) of stream 
         ##  ...    ...  optional args for new(...)
         ##
+
+        for (i in 1:2) {
+  
+          ## -- run test
+          pval <- rstream.check.chi2.run(type, ...)
+
+          ## -- check p-value
+          if (pval > alpha) { # test passed
+            message("Chi2 test PASSed with p-value=",signif(pval))
+            break
+          }
+        
+          else {
+            if (i<1.5) 
+              warning("Chi2 test failed once with p-value=",signif(pval)," --> Try again")
+            else
+              stop("chi2 test FAILED!  p-value=",signif(pval), call.=FALSE)
+          }
+        }
+
+} ## --- end of rstream.check.chi2() ---
+
+## ..........................................................................
+
+rstream.check.chi2.run <- function (type, ...) {
+        ##  Run a chi^2 test and evaluate p-value.
+        ##  
+        ##  type   ...  type (class) of stream 
+        ##  ...    ...  optional args for new(...)
+        ##
         
 	## -- Create a stream 
 	s <- new (type, ...)
@@ -284,14 +314,11 @@ rstream.check.chi2 <- function (type, ...) {
         h <- hist(u,plot=F,breaks=breaks)$count
         ## -- run unur.chiq.test
         pval <- chisq.test(h)$p.value
-        ## -- check p-value
-        if (pval > alpha) { # test passed
-                message("chi2 test PASSed with p-value=",signif(pval))
-        }
-        else {
-                stop("chi2 test FAILED!  p-value=",signif(pval), call.=FALSE)
-        }
-} ## --- end of rstream.check.chi2() ---
+
+        ## -- return p-value
+        pval
+
+} ## --- end of rstream.check.chi2.run() ---
 
 
 #############################################################################
