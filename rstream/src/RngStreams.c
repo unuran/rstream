@@ -16,7 +16,11 @@
  * 2004-05-15  Josef Leydold (with the permission of the author):
  *             exit() statements replaced by return().
  * 2004-05-16  Josef Leydold:
- *             added RngStream_GetPackageSeed()
+ *             added RngStream_GetPackageSeed().
+ * 2011-09-28  Josef Leydold:
+ *             commented out all code that is not required for
+ *             R package 'rstream', in particular all printf()
+ *             statements.
  */
 
 #include "RngStreams.h"
