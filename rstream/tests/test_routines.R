@@ -189,17 +189,27 @@ rstream.check.setRNG <- function (
                                   type,		  # type (class) of stream 
                                   ...) {	  # optional args for new(...)
 
-	## Create a stream ..................................................
+        ## Create a stream ..................................................
 	s <- new (type, name=streamname, ...)
+
+        ## make a working copy
+        sc <- rstream.clone(s)
         
 	## set RNG
 	rstream.RNG(s)
         
 	## s und runif() should produce the same sequence
-	x <- rstream.sample(s, samplesize)
+	x <- rstream.sample(sc, samplesize)
 	y <- runif(samplesize)
 	if (!identical(all.equal(x, y), TRUE))
-		stop("set RNG failed:1")
+		stop("set RNG failed: 1")
+
+        ## try again
+        ## (required as we had a bug in all pre-1.3 versions!)
+	rstream.RNG(s)
+	y <- runif(samplesize)
+	if (!identical(all.equal(x, y), TRUE))
+		stop("set RNG failed: 2")
         
 	## get RNG
 	sr <- rstream.RNG()
@@ -207,7 +217,7 @@ rstream.check.setRNG <- function (
 	rstream.antithetic(sr) <- TRUE   # this must not influence runif()
 	y <- runif(samplesize)
 	if (!identical(all.equal(x, y), TRUE))
-		stop("set RNG failed:1")
+		stop("set RNG failed: 3")
         
 }
 

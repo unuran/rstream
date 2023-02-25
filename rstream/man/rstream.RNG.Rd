@@ -1,8 +1,6 @@
 \name{rstream.RNG}
 \alias{rstream.RNG}
 
-%- Also NEED an '\alias' for EACH other topic documented here.
-
 \title{Get and set "rstream" object from/to R global generator}
 
 \description{
@@ -29,10 +27,10 @@ rstream.RNG(stream = NULL)
   \code{rstream.RNG} returns an "rstream" object.
 }
 
-\author{Josef Leydold (leydold@statmath.wu.ac.at)}
+\author{Josef Leydold \email{josef.leydold@wu.ac.at}}
 
 \seealso{
-  \code{\link{rstream-class}}.
+  \code{\linkS4class{rstream}}.
 }
 
 \examples{

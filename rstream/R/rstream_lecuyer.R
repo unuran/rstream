@@ -279,9 +279,16 @@ setMethod(".rstream.getRNG", "rstream.lecuyer",
 ##    (internal method; not exported)
 setMethod(".rstream.setRNG", "rstream.lecuyer", 
           function(stream) {
-                  .Call("R_RngStreams_setRNG", stream@stream, PACKAGE="rstream")
-                  RNGkind(kind="user-supplied")
-                  stream
+            if (isTRUE(get(".rstream.version", envir=.rstream.envir) < 1003)) {
+              ## pre 1.3:
+              .Call("R_RngStreams_setRNG", stream@stream, PACKAGE="rstream")
+              RNGkind(kind="user-supplied")
+            } else {
+              ## new version:
+              RNGkind(kind="user-supplied")
+              .Call("R_RngStreams_setRNG", stream@stream, PACKAGE="rstream")
+            }
+            stream
           } )
 
 ## End ----------------------------------------------------------------------

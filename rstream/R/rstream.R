@@ -23,6 +23,10 @@
 	if (!exists(".rstream.Count", envir=.rstream.envir))
 		assign(".rstream.Count", 0, envir=.rstream.envir)
 
+        ## .rstream.version
+        ##    Store rstream version for compatibilty function.
+        ##    Use 9999000 to indicate installed version ("default")
+        assign(".rstream.version", 9999000, envir=.rstream.envir)
 }
 
 
@@ -262,5 +266,37 @@ setMethod(".rstream.setRNG", "rstream",
             "\tincreased Precision = ", incp, "\n",
             sep="") 
 } 
+
+## Compatibility function to set behavior to earlier version of Rstream -----
+
+## Set version:
+##   The version must be given as string.
+##   The string is then converted into an number and stored in
+##   '.rstream.version'
+
+rstream.version <- function(version) {
+
+  if (missing(version)) {
+    num <- get(".rstream.version", envir=.rstream.envir)
+    if (num < 9999000) {
+      return (paste(num %/% 1000, num %% 1000, sep=".") )
+    } else {
+      return ("default")  ## default: installed version
+    }
+
+  } else {
+
+    if (version=="default") version <- "9999.00"
+
+    num <- as.numeric(strsplit(as.character(version),".", fixed=TRUE)[[1]])
+
+    if ((length(num)!=2 && length(num)!=3)
+        || !isTRUE(num[1]>=0) || !isTRUE(num[2]>=0) || !isTRUE(num[2]<=999)) 
+      stop("malformed version string")
+    
+    assign(".rstream.version", 1000*num[1] + num[2], envir=.rstream.envir)
+  }
+}
+
 
 ## End ----------------------------------------------------------------------

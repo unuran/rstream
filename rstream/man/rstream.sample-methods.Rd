@@ -38,8 +38,10 @@
   \code{\link{rstream.runif-class}}.
 }
 
+\author{Josef Leydold \email{josef.leydold@wu.ac.at}}
+
 \seealso{%
-  \code{\link{rstream-class}}.
+  \code{\linkS4class{rstream}}.
 }
 
 \note{\code{r} is equivalent to \code{rstream.sample}.}

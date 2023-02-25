@@ -15,8 +15,8 @@
 \tabular{ll}{
 Package: \tab rstream\cr
 Type: \tab Package\cr
-Version: \tab 1.2.5         \cr
-Date: \tab 2010-05-05    \cr
+Version: \tab 1.3.0         \cr
+Date: \tab 2011-02-10    \cr
 License: \tab GPL 2 or later\cr
 }
 
@@ -40,10 +40,10 @@ The interface to these classes is inspired by Pierre L'Ecuyers
 RngStreams package.
 
 For an overview of classes and methods, see
-\code{\link{rstream-class}}.
+\code{\linkS4class{rstream}}.
 }
 
-\author{Josef Leydold <leydold@statmath.wu.ac.at>}
+\author{Josef Leydold \email{josef.leydold@wu.ac.at}}
 
 \references{
   P. L'Ecuyer and J. Leydold (2005):
@@ -52,7 +52,7 @@ For an overview of classes and methods, see
 }
 
 \seealso{
-  \code{\link{rstream-class}}.
+  \code{\linkS4class{rstream}}.
 }
 
 \keyword{distribution}

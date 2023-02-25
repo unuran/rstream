@@ -124,7 +124,7 @@
 }
 
 \author{
-  Josef Leydold (leydold@statmath.wu.ac.at)
+  Josef Leydold \email{josef.leydold@wu.ac.at}
 
   underlying generator: Pierre L'Ecyuer and Richard Simard
 }
@@ -159,8 +159,8 @@
 }
 
 \seealso{%
-  \code{\link{rstream-class}},
-  \code{\link{rstream.mrg32k3a-class}},
+  \code{\linkS4class{rstream}},
+  \code{\linkS4class{rstream.mrg32k3a}},
   \code{\link{rstream.antithetic-methods}},
   \code{\link{rstream.clone-methods}},
   \code{\link{rstream.incprecision-methods}},
