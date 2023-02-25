@@ -1,7 +1,7 @@
-# Tinflex
+# rstream
 
 R package 
-[*Tinflex*](https://CRAN.R-project.org/package=rtream)
+[*rstream*](https://CRAN.R-project.org/package=rtream)
 
 provides a unified object oriented interface for multiple independent
 streams of random numbers from different sources. 
