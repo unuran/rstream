@@ -60,3 +60,5 @@ rstream.incprecision(s)
 }
 
 \keyword{methods}
+\keyword{distribution}
+\keyword{datagen}

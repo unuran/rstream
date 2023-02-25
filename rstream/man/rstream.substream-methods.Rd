@@ -60,3 +60,5 @@ if (identical(x,y)) print("x and y are identical samples")
 }
 
 \keyword{methods}
+\keyword{distribution}
+\keyword{datagen}

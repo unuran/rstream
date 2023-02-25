@@ -60,3 +60,5 @@ x <- r(s,100)
 }
 
 \keyword{methods}
+\keyword{distribution}
+\keyword{datagen}

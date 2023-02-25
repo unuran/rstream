@@ -52,4 +52,7 @@ rstream.nextsubstream(gs)
 rstream.RNG(gs)
 
 }
+
 \keyword{methods}
+\keyword{distribution}
+\keyword{datagen}
