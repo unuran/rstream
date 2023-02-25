@@ -39,22 +39,19 @@ void RngStream_SetAntithetic (RngStream g, int a);
 void RngStream_IncreasedPrecis (RngStream g, int incp);
 
 
-int RngStream_SetSeed (RngStream g, const unsigned long seed[6]);
+/* int RngStream_SetSeed (RngStream g, const unsigned long seed[6]); */
 
 
-void RngStream_AdvanceState (RngStream g, long e, long c);
+/* void RngStream_AdvanceState (RngStream g, long e, long c); */
 
 
-void RngStream_GetState (RngStream g, unsigned long seed[6]);
+/* void RngStream_GetState (RngStream g, unsigned long seed[6]); */
 
 
-void RngStream_WriteState (RngStream g);
+/* void RngStream_WriteState (RngStream g); */
 
 
-void RngStream_WriteStateFull (RngStream g);
-
-
-void RngStream_WriteStateFull (RngStream g);
+/* void RngStream_WriteStateFull (RngStream g); */
 
 
 double RngStream_RandU01 (RngStream g);
