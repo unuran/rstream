@@ -1,0 +1,21 @@
+useDynLib(rstream)
+
+import("methods")
+
+exportMethods(rstream.antithetic, "rstream.antithetic<-")
+exportMethods(rstream.incprecision, "rstream.incprecision<-")
+exportMethods(rstream.name, "rstream.name<-")
+exportMethods(rstream.sample)
+exportMethods(r)
+exportMethods(rstream.reset)
+exportMethods(rstream.resetsubstream)
+exportMethods(rstream.nextsubstream)
+exportMethods(rstream.clone)
+exportMethods(rstream.packed, "rstream.packed<-")
+
+exportMethods(print)
+exportMethods(initialize)
+
+export(rstream.RNG)
+
+exportClass(rstream, rstream.lecuyer, rstream.runif)
