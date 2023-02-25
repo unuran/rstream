@@ -1,6 +1,7 @@
 useDynLib(rstream)
 
-import("methods")
+importFrom("methods", "is", "new")
+importFrom("stats", "runif")
 
 exportMethods(rstream.antithetic, "rstream.antithetic<-")
 exportMethods(rstream.incprecision, "rstream.incprecision<-")
