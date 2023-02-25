@@ -15,8 +15,8 @@
 \tabular{ll}{
 Package: \tab rstream\cr
 Type: \tab Package\cr
-Version: \tab 1.2.4         \cr
-Date: \tab 2009-11-17    \cr
+Version: \tab 1.2.5         \cr
+Date: \tab 2010-05-05    \cr
 License: \tab GPL 2 or later\cr
 }
 
@@ -43,7 +43,7 @@ For an overview of classes and methods, see
 \code{\link{rstream-class}}.
 }
 
-\author{Josef Leydold <leydold@statmath.wu-wien.ac.at>}
+\author{Josef Leydold <leydold@statmath.wu.ac.at>}
 
 \references{
   P. L'Ecuyer and J. Leydold (2005):

@@ -29,7 +29,7 @@ rstream.RNG(stream = NULL)
   \code{rstream.RNG} returns an "rstream" object.
 }
 
-\author{Josef Leydold (leydold@statistik.wu-wien.ac.at)}
+\author{Josef Leydold (leydold@statmath.wu.ac.at)}
 
 \seealso{
   \code{\link{rstream-class}}.

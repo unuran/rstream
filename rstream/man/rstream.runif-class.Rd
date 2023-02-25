@@ -98,7 +98,7 @@
   }
 }
 
-\author{Josef Leydold (leydold@statistik.wu-wien.ac.at)}
+\author{Josef Leydold (leydold@statmath.wu.ac.at)}
 \note{
   The slots of this class must not be accessed directly. Use
   the above methods instead.
