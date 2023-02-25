@@ -182,6 +182,9 @@ setReplaceMethod("rstream.packed", "rstream",
 setMethod( "print", "rstream",
           function(x, ...) { .rstream.PrintData(x) } )
 
+setMethod( "show", "rstream",
+          function(object) { print(object) } )
+
 
 ## Rstream objects <-> R generators -----------------------------------------
 
