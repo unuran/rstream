@@ -1,3 +1,7 @@
+Version 1.2.1: 2006-09-21
+
+	- Fixed DESCRIPTION file for upcoming R-2.4.0 release
+
 Version 1.2: 2006-02-15
 
 	- Fixed signature of method rstream.sample
