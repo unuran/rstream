@@ -9,7 +9,7 @@
  *                                                                           *
  *****************************************************************************/
 
-/* $Id: R_RngStreams.h,v 1.12 2004/10/21 11:01:03 leydold Exp $ */
+/* $Id: R_RngStreams.h 8 2007-09-06 16:04:35Z leydold $ */
 
 /*---------------------------------------------------------------------------*/
 
@@ -19,7 +19,7 @@ SEXP R_RngStreams_GetPackageSeed (void);
 /* Set and get global seed for RNGStreams package.                           */
 /*---------------------------------------------------------------------------*/
 
-SEXP R_RngStreams_Init (SEXP R_name);
+SEXP R_RngStreams_Init (SEXP R_obj, SEXP R_name);
 /*---------------------------------------------------------------------------*/
 /* Create and initinalize Stream generator object.                           */
 /*---------------------------------------------------------------------------*/
@@ -52,7 +52,7 @@ SEXP R_RngStreams_ResetNextSubstream (SEXP R_stream);
 /* Goto to begining of current and next substream, respectively.             */
 /*---------------------------------------------------------------------------*/
 
-SEXP R_RngStreams_Clone (SEXP R_stream, SEXP R_name);
+SEXP R_RngStreams_Clone (SEXP R_obj, SEXP R_stream, SEXP R_name);
 /*---------------------------------------------------------------------------*/
 /* Make a clone (copy) of Stream object.                                     */
 /*---------------------------------------------------------------------------*/
@@ -69,10 +69,9 @@ SEXP R_RngStreams_GetData (SEXP R_stream);
 /* (For the name of the Stream object use R_RngStreams_GetName() ).          */
 /*---------------------------------------------------------------------------*/
 
-SEXP R_RngStreams_SetData (SEXP R_stream_data, SEXP R_name);
+SEXP R_RngStreams_SetData (SEXP sexp_stream, SEXP R_stream_data, SEXP R_name);
 /*---------------------------------------------------------------------------*/
-/* Create and initialize Stream generator object and                         */
-/* set data structure of Stream object.                                      */
+/* Set data structure in Stream object.                                      */
 /*---------------------------------------------------------------------------*/
 
 SEXP R_RngStreams_Free (SEXP R_stream);
