@@ -1,7 +1,7 @@
 Package: rstream
-Version: 1.0
-Date: 2005-04-02
-Title: Random streams
+Version: 1.1
+Date: 2005-10-01
+Title: Streams of random numbers
 Author: Josef Leydold <leydold@statistik.wu-wien.ac.at>
 Maintainer: Josef Leydold <leydold@statistik.wu-wien.ac.at>
 Depends: R (>= 2.0.0)
@@ -9,4 +9,3 @@ Description: Unified object oriented interface for multiple independent streams 
 Note: The software RngStreams included in this package is subject to the copyright of Pierre L'Ecuyer, University of Montreal, and can be freely used only for personnal, academic, or non-commercial purposes.
 License: GPL version 2
 URL: http://statistik.wu-wien.ac.at/arvag/
-Packaged: Fri Apr  1 15:20:25 2005; leydold

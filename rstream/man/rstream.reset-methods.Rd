@@ -3,8 +3,10 @@
 \alias{rstream.reset}
 \alias{rstream.reset-methods}
 \alias{rstream.reset,rstream-method}
-\alias{rstream.reset,rstream.lecuyer-method}
+\alias{rstream.reset,rstream.mrg32k3a-method}
 \alias{rstream.reset,rstream.runif-method}
+%% obsolete
+\alias{rstream.reset,rstream.lecuyer-method}
 
 \title{Methods for Function rstream.reset in Package `rstream'}
 
@@ -17,7 +19,7 @@
 }
 
 \usage{
-rstream.reset(stream)
+\S4method{rstream.reset}{rstream}(stream)
 }
 \arguments{
   \item{stream}{an "rstream" object.}
@@ -25,7 +27,7 @@ rstream.reset(stream)
 
 \section{Methods}{
   Methods available for all "rstream" subclasses:
-  \code{\link{rstream.lecuyer-class}},
+  \code{\link{rstream.mrg32k3a-class}},
   \code{\link{rstream.runif-class}}.
 }
 
@@ -34,8 +36,8 @@ rstream.reset(stream)
 }
 
 \examples{
-## create a new rstream object (of subclass rstream.lecuyer)
-s <- new("rstream.lecuyer")
+## create a new rstream object (of subclass rstream.mrg32k3a)
+s <- new("rstream.mrg32k3a")
 
 ## generate a sample
 x <- rstream.sample(s,10)

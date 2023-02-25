@@ -49,12 +49,12 @@ setClass( "rstream",
 ##    get and set name of Rstream object
 if(!isGeneric("rstream.name"))
 	setGeneric("rstream.name", function(stream) standardGeneric("rstream.name"))
-setMethod("rstream.name", c("rstream"), 
+setMethod("rstream.name", "rstream", 
           function(stream) { "unknown" } )
 
 if(!isGeneric("rstream.name<-"))
         setGeneric("rstream.name<-", function(stream, value) standardGeneric("rstream.name<-"))
-setReplaceMethod("rstream.name", c("rstream"), 
+setReplaceMethod("rstream.name", "rstream", 
                  function(stream, value) {
                          stop(class(stream)[1],": No names for this Rstream class")
                          stream
@@ -65,12 +65,12 @@ setReplaceMethod("rstream.name", c("rstream"),
 ##   get and set flag for antithetic random numbers
 if(!isGeneric("rstream.antithetic"))
 	setGeneric("rstream.antithetic", function(stream) standardGeneric("rstream.antithetic"))
-setMethod("rstream.antithetic", c("rstream"), 
+setMethod("rstream.antithetic", "rstream", 
           function(stream) { FALSE } )
 
 if(!isGeneric("rstream.antithetic<-"))
         setGeneric("rstream.antithetic<-", function(stream, value) standardGeneric("rstream.antithetic<-"))
-setReplaceMethod("rstream.antithetic", c("rstream"), 
+setReplaceMethod("rstream.antithetic", "rstream", 
                  function(stream, value) {
                          stop(class(stream)[1],": No antithetic variates available for this Rstream class")
                          stream
@@ -81,12 +81,12 @@ setReplaceMethod("rstream.antithetic", c("rstream"),
 ##    get and set flag for increased precision of random numbers
 if(!isGeneric("rstream.incprecision"))
 	setGeneric("rstream.incprecision", function(stream) standardGeneric("rstream.incprecision"))
-setMethod("rstream.incprecision", c("rstream"), 
+setMethod("rstream.incprecision", "rstream", 
           function(stream) { FALSE } )
 
 if(!isGeneric("rstream.incprecision<-"))
         setGeneric("rstream.incprecision<-", function(stream, value) standardGeneric("rstream.incprecision<-"))
-setReplaceMethod("rstream.incprecision", c("rstream"), 
+setReplaceMethod("rstream.incprecision", "rstream", 
                  function(stream, value) {
                          stop(class(stream)[1],": No increased precision available for this Rstream class")
                          stream
@@ -120,7 +120,7 @@ setMethod("r", c("rstream","numeric"),
 ##   reset current substream of Rstream object
 if(!isGeneric("rstream.resetsubstream"))
         setGeneric("rstream.resetsubstream", function(stream) standardGeneric("rstream.resetsubstream"))
-setMethod("rstream.resetsubstream", c("rstream"), 
+setMethod("rstream.resetsubstream", "rstream", 
           function(stream) { 
                   stop(class(stream)[1],": No substreams for this Rstream class") } )
 
@@ -129,7 +129,7 @@ setMethod("rstream.resetsubstream", c("rstream"),
 ##   skip to next substream of Rstream object
 if(!isGeneric("rstream.nextsubstream"))
         setGeneric("rstream.nextsubstream", function(stream) standardGeneric("rstream.nextsubstream"))
-setMethod("rstream.nextsubstream", c("rstream"), 
+setMethod("rstream.nextsubstream", "rstream", 
           function(stream) { 
                   stop(class(stream)[1],": No substreams for this Rstream class") } )
 
@@ -140,7 +140,7 @@ setMethod("rstream.nextsubstream", c("rstream"),
 ##   reset Rstream object
 if(!isGeneric("rstream.reset"))
         setGeneric("rstream.reset", function(stream) standardGeneric("rstream.reset"))
-setMethod("rstream.reset", c("rstream"), 
+setMethod("rstream.reset", "rstream", 
           function(stream) { 
                   stop(class(stream)[1],": No reset for this Rstream class") } )
 
@@ -149,7 +149,7 @@ setMethod("rstream.reset", c("rstream"),
 ##    clone (copy) Rstream object
 if(!isGeneric("rstream.clone"))
 	setGeneric("rstream.clone", function(stream) standardGeneric("rstream.clone"))
-setMethod("rstream.clone", c("rstream"), 
+setMethod("rstream.clone", "rstream", 
           function(stream) { 
                   stop(class(stream)[1],": Cannot make clone for this Rstream class")
                   stream
@@ -161,12 +161,12 @@ setMethod("rstream.clone", c("rstream"),
 ##    (and can be easily copied within R)
 if(!isGeneric("rstream.packed"))
 	setGeneric("rstream.packed", function(stream) standardGeneric("rstream.packed"))
-setMethod("rstream.packed", c("rstream"), 
+setMethod("rstream.packed", "rstream", 
           function(stream) { stream@is.packed } )
 
 if(!isGeneric("rstream.packed<-"))
         setGeneric("rstream.packed<-", function(stream, value) standardGeneric("rstream.packed<-"))
-setReplaceMethod("rstream.packed", c("rstream"), 
+setReplaceMethod("rstream.packed", "rstream", 
                  function(stream, value) {
                          stop(class(stream)[1],": Cannot pack/unpack object of this Rstream class")
                          stream
@@ -223,7 +223,7 @@ rstream.RNG <- function (stream=NULL) {
 if(!isGeneric(".rstream.getRNG"))
 	setGeneric(".rstream.getRNG", function(stream) standardGeneric(".rstream.getRNG"))
 
-setMethod(".rstream.getRNG", c("rstream"), 
+setMethod(".rstream.getRNG", "rstream", 
           function(stream) {
                   stop(class(stream)[1],": Cannot get object for this Rstream class") } )
 
@@ -233,7 +233,7 @@ setMethod(".rstream.getRNG", c("rstream"),
 ##    (internal method; not exported)
 if(!isGeneric(".rstream.setRNG"))
 	setGeneric(".rstream.setRNG", function(stream) standardGeneric(".rstream.setRNG"))
-setMethod(".rstream.setRNG", c("rstream"), 
+setMethod(".rstream.setRNG", "rstream", 
           function(stream) {
                   stop(class(stream)[1],": Cannot set object of this Rstream class as R global generator")
                   stream

@@ -6,10 +6,13 @@
 \alias{rstream.packed<--methods}
 \alias{rstream.packed,rstream-method}
 \alias{rstream.packed<-,rstream-method}
-\alias{rstream.packed,rstream.lecuyer-method}
-\alias{rstream.packed<-,rstream.lecuyer-method}
+\alias{rstream.packed,rstream.mrg32k3a-method}
+\alias{rstream.packed<-,rstream.mrg32k3a-method}
 \alias{rstream.packed,rstream.runif-method}
 \alias{rstream.packed<-,rstream.runif-method}
+%% obsolete
+\alias{rstream.packed,rstream.lecuyer-method}
+\alias{rstream.packed<-,rstream.lecuyer-method}
 
 \title{Methods for Function rstream.packed in Package `rstream'}
 
@@ -26,7 +29,7 @@
 }
 
 \usage{
-rstream.packed(stream)
+\S4method{rstream.packed}{rstream}(stream)
 rstream.packed(stream) <- value
 }
 
@@ -40,7 +43,7 @@ rstream.packed(stream) <- value
 
 \section{Methods}{
   Methods available for all "rstream" subclasses:
-  \code{\link{rstream.lecuyer-class}},
+  \code{\link{rstream.mrg32k3a-class}},
   \code{\link{rstream.runif-class}}.
 }
 
@@ -49,8 +52,8 @@ rstream.packed(stream) <- value
 }
 
 \examples{
-## create a new rstream object (of subclass rstream.lecuyer)
-s <- new("rstream.lecuyer")
+## create a new rstream object (of subclass rstream.mrg32k3a)
+s <- new("rstream.mrg32k3a")
 
 ## pack rstream object
 rstream.packed(s) <- TRUE

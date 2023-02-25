@@ -6,10 +6,13 @@
 \alias{rstream.name<--methods}
 \alias{rstream.name,rstream-method}
 \alias{rstream.name<-,rstream-method}
-\alias{rstream.name,rstream.lecuyer-method}
-\alias{rstream.name<-,rstream.lecuyer-method}
+\alias{rstream.name,rstream.mrg32k3a-method}
+\alias{rstream.name<-,rstream.mrg32k3a-method}
 \alias{rstream.name,rstream.runif-method}
 \alias{rstream.name<-,rstream.runif-method}
+%% obsolete
+\alias{rstream.name,rstream.lecuyer-method}
+\alias{rstream.name<-,rstream.lecuyer-method}
 
 \title{Methods for Function rstream.name in Package `rstream'}
 
@@ -22,7 +25,7 @@
 }
 
 \usage{
-rstream.name(stream)
+\S4method{rstream.name}{rstream}(stream)
 rstream.name(stream) <- value
 }
 \arguments{
@@ -32,7 +35,7 @@ rstream.name(stream) <- value
 
 \section{Methods}{
   Methods available for all "rstream" subclasses:
-  \code{\link{rstream.lecuyer-class}},
+  \code{\link{rstream.mrg32k3a-class}},
   \code{\link{rstream.runif-class}}.
 }
 
@@ -41,8 +44,8 @@ rstream.name(stream) <- value
 }
 
 \examples{
-## create a new rstream object (of subclass rstream.lecuyer)
-s <- new("rstream.lecuyer")
+## create a new rstream object (of subclass rstream.mrg32k3a)
+s <- new("rstream.mrg32k3a")
 
 ## set name of rstream object
 rstream.name(s) <- "mystream"

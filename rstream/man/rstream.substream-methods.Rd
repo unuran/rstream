@@ -6,6 +6,9 @@
 \alias{rstream.nextsubstream-methods}
 \alias{rstream.resetsubstream,rstream-method}
 \alias{rstream.nextsubstream,rstream-method}
+\alias{rstream.resetsubstream,rstream.mrg32k3a-method}
+\alias{rstream.nextsubstream,rstream.mrg32k3a-method}
+%% obsolete
 \alias{rstream.resetsubstream,rstream.lecuyer-method}
 \alias{rstream.nextsubstream,rstream.lecuyer-method}
 
@@ -21,8 +24,8 @@
 }
 
 \usage{
-rstream.resetsubstream(stream)
-rstream.nextsubstream(stream)
+\S4method{rstream.resetsubstream}{rstream}(stream)
+\S4method{rstream.nextsubstream}{rstream}(stream)
 }
 \arguments{
   \item{stream}{an "rstream" object.}
@@ -30,7 +33,7 @@ rstream.nextsubstream(stream)
 
 \section{Methods}{
   Methods available for the following "rstream" subclasses:
-  \code{\link{rstream.lecuyer-class}}.
+  \code{\link{rstream.mrg32k3a-class}}.
 }
 
 \seealso{%
@@ -38,8 +41,8 @@ rstream.nextsubstream(stream)
 }
 
 \examples{
-## create a new rstream object (of subclass rstream.lecuyer)
-s <- new("rstream.lecuyer")
+## create a new rstream object (of subclass rstream.mrg32k3a)
+s <- new("rstream.mrg32k3a")
 
 ## jump to beginning of next substream
 rstream.nextsubstream(s)

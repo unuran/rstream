@@ -37,7 +37,7 @@ rstream.RNG(stream = NULL)
 
 \examples{
 ## create a new rstream.runif object
-s <- new("rstream.lecuyer")
+s <- new("rstream.mrg32k3a")
 
 ## use this stream as global R uniform RNG
 rstream.RNG(s)

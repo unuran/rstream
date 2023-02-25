@@ -3,6 +3,7 @@
 	library.dynam("rstream", pkg, lib)
 	.rstream.init()
 	.rstream.lecuyer.init()
+	.rstream.mrg32k3a.init()
 	.rstream.runif.init()
 }
 

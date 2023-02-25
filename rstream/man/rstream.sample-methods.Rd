@@ -8,10 +8,13 @@
 \alias{rstream.sample,rstream,numeric-method}
 \alias{r,rstream-method}
 \alias{r,rstream,numeric-method}
-\alias{rstream.sample,rstream.lecuyer-method}
-\alias{r,rstream.lecuyer-method}
+\alias{rstream.sample,rstream.mrg32k3a-method}
+\alias{r,rstream.mrg32k3a-method}
 \alias{rstream.sample,rstream.runif-method}
 \alias{r,rstream.runif-method}
+%% obsolete
+\alias{rstream.sample,rstream.lecuyer-method}
+\alias{r,rstream.lecuyer-method}
 
 \title{Methods for Function rstream.sample in Package `rstream'}
 
@@ -31,7 +34,7 @@
 
 \section{Methods}{
   Methods available for all "rstream" subclasses:
-  \code{\link{rstream.lecuyer-class}},
+  \code{\link{rstream.mrg32k3a-class}},
   \code{\link{rstream.runif-class}}.
 }
 
@@ -42,8 +45,8 @@
 \note{\code{r} is equivalent to \code{rstream.sample}.}
 
 \examples{
-## create a new rstream object (of subclass rstream.lecuyer)
-s <- new("rstream.lecuyer")
+## create a new rstream object (of subclass rstream.mrg32k3a)
+s <- new("rstream.mrg32k3a")
 
 ## get a random number
 x <- rstream.sample(s)

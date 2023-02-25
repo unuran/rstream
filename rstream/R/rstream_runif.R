@@ -122,7 +122,7 @@ setMethod( "initialize", "rstream.runif",
 
 ## rstream.name
 ##    get and set name of Rstream object
-setMethod("rstream.name", c("rstream.runif"), 
+setMethod("rstream.name", "rstream.runif", 
           function(stream) { 
                   if (stream@is.packed) 
                           return (stream@pack$name)
@@ -130,7 +130,7 @@ setMethod("rstream.name", c("rstream.runif"),
                           return (get("name", envir=stream@xstate))
           } )
 
-setReplaceMethod("rstream.name", c("rstream.runif"), 
+setReplaceMethod("rstream.name", "rstream.runif", 
                  function(stream, value) {
                          if (stream@is.packed) stop("Cannot change name for PACKED Rstream") 
                          assign("name", as.character(value), envir=stream@xstate)
@@ -140,7 +140,7 @@ setReplaceMethod("rstream.name", c("rstream.runif"),
 
 ## rstream.antithetic
 ##   get and set flag for antithetic random numbers:  
-setMethod("rstream.antithetic", c("rstream.runif"), 
+setMethod("rstream.antithetic", "rstream.runif", 
           function(stream) { 
                   if (stream@is.packed) 
                           return (stream@pack$anti)
@@ -148,7 +148,7 @@ setMethod("rstream.antithetic", c("rstream.runif"),
                           return (get("anti", envir=stream@xstate))
           } )
 
-setReplaceMethod("rstream.antithetic", c("rstream.runif"),
+setReplaceMethod("rstream.antithetic", "rstream.runif",
                  function(stream, value) { 
                          if (stream@is.packed) stop("Cannot change antithetic flag for PACKED Rstream") 
                          assign("anti", as.logical(value), envir=stream@xstate)
@@ -202,7 +202,7 @@ setMethod("r", c("rstream.runif","numeric"),
 
 ## rstream.reset
 ##   reset Rstream object
-setMethod("rstream.reset", c("rstream.runif"), 
+setMethod("rstream.reset", "rstream.runif", 
           function(stream) { 
                   if (stream@is.packed) stop("Cannot reset PACKED Rstream") 
                   ## copy seed into state variable
@@ -211,7 +211,7 @@ setMethod("rstream.reset", c("rstream.runif"),
 
 ## rstream.clone
 ##    clone (copy) Rstream object
-setMethod("rstream.clone", c("rstream.runif"), 
+setMethod("rstream.clone", "rstream.runif", 
           function(stream) { 
                   if (stream@is.packed) stop("Cannot clone PACKED Rstream") 
                   ## copy R object
@@ -234,7 +234,7 @@ setMethod("rstream.clone", c("rstream.runif"),
 ## rstream.pack, rstream.unpack
 ##    pack and unpack Rstream object such that all data are contained in R object
 ##    (and can be easily copied within R)
-setReplaceMethod("rstream.packed", c("rstream.runif"), 
+setReplaceMethod("rstream.packed", "rstream.runif", 
                  function(stream, value) {
                          value <- as.logical(value)
                          ## check whether there is something to do
@@ -277,7 +277,7 @@ setMethod( "print", "rstream.runif",
 ## .rstream.getRNG
 ##    get Rstream object for current R generator
 ##    (internal method; not exported)
-setMethod(".rstream.getRNG", c("rstream.runif"), 
+setMethod(".rstream.getRNG", "rstream.runif", 
           function(stream) { new("rstream.runif", kind="current") } )
 
 
@@ -285,7 +285,7 @@ setMethod(".rstream.getRNG", c("rstream.runif"),
 ##    set R generator to given Rstream object
 ##    (internal method; not exported)
 
-setMethod(".rstream.setRNG", c("rstream.runif"), 
+setMethod(".rstream.setRNG", "rstream.runif", 
           function(stream) {
                   if (rstream.antithetic(stream)) {
                           warning ("antithetic DISABLED")

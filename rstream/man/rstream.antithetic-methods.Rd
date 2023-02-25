@@ -6,10 +6,13 @@
 \alias{rstream.antithetic<--methods}
 \alias{rstream.antithetic,rstream-method}
 \alias{rstream.antithetic<-,rstream-method}
-\alias{rstream.antithetic,rstream.lecuyer-method}
-\alias{rstream.antithetic<-,rstream.lecuyer-method}
+\alias{rstream.antithetic,rstream.mrg32k3a-method}
+\alias{rstream.antithetic<-,rstream.mrg32k3a-method}
 \alias{rstream.antithetic,rstream.runif-method}
 \alias{rstream.antithetic<-,rstream.runif-method}
+%% obsolete
+\alias{rstream.antithetic,rstream.lecuyer-method}
+\alias{rstream.antithetic<-,rstream.lecuyer-method}
 
 \title{Methods for Function rstream.antithetic in Package `rstream'}
 
@@ -30,7 +33,7 @@
 }
 
 \usage{
-rstream.antithetic(stream)
+\S4method{rstream.antithetic}{rstream}(stream)
 rstream.antithetic(stream) <- value
 }
 \arguments{
@@ -41,7 +44,7 @@ rstream.antithetic(stream) <- value
 
 \section{Methods}{
   Methods available for the following "rstream" subclasses:
-  \code{\link{rstream.lecuyer-class}},
+  \code{\link{rstream.mrg32k3a-class}},
   \code{\link{rstream.runif-class}}.
 }
 
@@ -50,8 +53,8 @@ rstream.antithetic(stream) <- value
 }
 
 \examples{
-## create a new rstream object (of subclass rstream.lecuyer)
-s <- new("rstream.lecuyer")
+## create a new rstream object (of subclass rstream.mrg32k3a)
+s <- new("rstream.mrg32k3a")
 
 ## set antithetic flag of rstream object
 rstream.antithetic(s) <- TRUE
