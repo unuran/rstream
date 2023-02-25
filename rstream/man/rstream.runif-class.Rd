@@ -4,7 +4,7 @@
 \alias{initialize,rstream.runif-method}
 \alias{print,rstream.runif-method}
 
-\title{Class "rstream.runif" -- Interface to \R internal uniform random
+\title{Class "rstream.runif" -- Interface to R internal uniform random
   number generators} 
 
 \description{
@@ -20,7 +20,7 @@
   Objects can be created by calls of the form
   \code{new("rstream.runif", name, kind, seed, antithetic)}.
 
-  \itemize{
+  \describe{
     \item{name:}{An arbitrary string to name the stream object.
       If omitted a string that consists of \code{runif} and some
       number (which is increased every time when a new \emph{rstream}

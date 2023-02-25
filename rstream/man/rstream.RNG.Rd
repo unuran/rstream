@@ -3,7 +3,7 @@
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 
-\title{Get and set "rstream" object from/to \R global generator}
+\title{Get and set "rstream" object from/to R global generator}
 
 \description{
   The function \code{rstream.RNG(stream)} is used to set a given
