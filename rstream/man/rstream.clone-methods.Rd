@@ -22,8 +22,9 @@
 }
 
 \usage{
-clone <- rstream.clone(stream)
+\S4method{rstream.clone}{rstream}(stream)
 }
+
 \arguments{
   \item{stream}{an "rstream" object.}
 }
