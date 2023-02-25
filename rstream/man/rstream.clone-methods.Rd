@@ -3,8 +3,10 @@
 \alias{rstream.clone}
 \alias{rstream.clone-methods}
 \alias{rstream.clone,rstream-method}
-\alias{rstream.clone,rstream.lecuyer-method}
+\alias{rstream.clone,rstream.mrg32k3a-method}
 \alias{rstream.clone,rstream.runif-method}
+%% obsolete
+\alias{rstream.clone,rstream.lecuyer-method}
 
 \title{Methods for Function rstream.clone in Package `rstream'}
 
@@ -28,7 +30,7 @@ clone <- rstream.clone(stream)
 
 \section{Methods}{
   Methods available for all "rstream" subclasses:
-  \code{\link{rstream.lecuyer-class}},
+  \code{\link{rstream.mrg32k3a-class}},
   \code{\link{rstream.runif-class}}.
 }
 
@@ -42,8 +44,8 @@ clone <- rstream.clone(stream)
 }
 
 \examples{
-## create a new rstream object (of subclass rstream.lecuyer)
-s <- new("rstream.lecuyer")
+## create a new rstream object (of subclass rstream.mrg32k3a)
+s <- new("rstream.mrg32k3a")
 
 ## make a copy (clone)
 clone <- rstream.clone(s)

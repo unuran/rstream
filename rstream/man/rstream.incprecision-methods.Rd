@@ -6,6 +6,9 @@
 \alias{rstream.incprecision<--methods}
 \alias{rstream.incprecision,rstream-method}
 \alias{rstream.incprecision<-,rstream-method}
+\alias{rstream.incprecision,rstream.mrg32k3a-method}
+\alias{rstream.incprecision<-,rstream.mrg32k3a-method}
+%% obsolete
 \alias{rstream.incprecision,rstream.lecuyer-method}
 \alias{rstream.incprecision<-,rstream.lecuyer-method}
 
@@ -26,7 +29,7 @@
 }
 
 \usage{
-rstream.incprecision(stream)
+\S4method{rstream.incprecision}{rstream}(stream)
 rstream.incprecision(stream) <- value
 }
 \arguments{
@@ -37,7 +40,7 @@ rstream.incprecision(stream) <- value
 
 \section{Methods}{
   Methods available for the following "rstream" subclasses:
-  \code{\link{rstream.lecuyer-class}}.
+  \code{\link{rstream.mrg32k3a-class}}.
 }
 
 \seealso{%
@@ -45,8 +48,8 @@ rstream.incprecision(stream) <- value
 }
 
 \examples{
-## create a new rstream object (of subclass rstream.lecuyer)
-s <- new("rstream.lecuyer")
+## create a new rstream object (of subclass rstream.mrg32k3a)
+s <- new("rstream.mrg32k3a")
 
 ## set increased precision flag of rstream object
 rstream.incprecision(s) <- TRUE

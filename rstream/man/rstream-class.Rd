@@ -147,7 +147,7 @@
 }
 
 \seealso{
-  \code{\link{rstream.lecuyer-class}},
+  \code{\link{rstream.mrg32k3a-class}},
   \code{\link{rstream.runif-class}}.
   \code{\link{rstream.antithetic-methods}},
   \code{\link{rstream.clone-methods}},

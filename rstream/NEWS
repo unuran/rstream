@@ -1,0 +1,10 @@
+
+Version 1.1: 2005-10-01
+
+	- Added class "rstream.mrg32k3a" to replace "rstream.lecuyer"
+          (suggested by Pierre L'Ecuyer)
+
+Version 1.0: 2005-04-02
+
+        - First public release.
+ 

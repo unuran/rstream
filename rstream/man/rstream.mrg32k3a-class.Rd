@@ -1,20 +1,16 @@
-\name{rstream.lecuyer-class}
+\name{rstream.mrg32k3a-class}
 \docType{class}
-\alias{rstream.lecuyer-class}
-\alias{initialize,rstream.lecuyer-method}
-\alias{print,rstream.lecuyer-method}
+\alias{rstream.mrg32k3a-class}
+\alias{initialize,rstream.mrg32k3a-method}
+\alias{print,rstream.mrg32k3a-method}
 
-\title{Class "rstream.lecuyer" -- Multiple streams with MRG32k3a
+\title{Class "rstream.mrg32k3a" -- Multiple streams with MRG32k3a
   backbone generator from Pierre L'Ecuyers RngStreams package}
 
 \description{
-  This class is obsolete and should be replaced by class
-  \code{"rstream.mrg32k3a"}!
-
-  This is the old class that implements the "rstream" interface for
-  Pierre L'Ecuyer's RngStreams package with the MRG32K3a multiple
-  recursive generator as its backbone generator. 
-  This package is well suited for multiple
+  This class implements the "rstream" interface for Pierre L'Ecuyer's
+  RngStreams package with the MRG32K3a multiple recursive generator as its
+  backbone generator. This package is well suited for multiple
   independent streams of uniform random numbers. In particular it
   provides antithetic variates and substreams. A very important feature
   is that different streams are stochastically independent (in
@@ -26,18 +22,18 @@
 
 \section{Objects from the Class}{
   Objects can be created by calls of the form
-  \code{new("rstream.lecuyer", name, seed, force.seed, antithetic,
+  \code{new("rstream.mrg32k3a", name, seed, force.seed, antithetic,
     incprecision)}.
 
   \itemize{
     \item{name:}{An arbitrary string to name the stream object.
-      If omitted a string that consists of \code{lecuyer} and some
+      If omitted a string that consists of \code{mrg32k3a} and some
       number (which is increased every time when a new \emph{rstream}
       object is created.}
     \item{seed:}{An array of six numbers. The seed for the RngStreams
       package. If omitted a random seed is used. It should only be
       set at the first creation of an instance of
-      an \emph{rstream.lecuyer} object.}
+      an \emph{rstream.mrg32k3a} object.}
     \item{force.see:}{A boolean. If the RngStreams package should be reseeded
       (which is not recommended) it must be \code{TRUE}.
       Default is \code{FALSE}.}
@@ -54,8 +50,8 @@
 }
 
 \section{Methods}{
-  The class "rstream.lecuyer" provides the following methods for
-  handling "rstream.lecuyer" objects. Some methods that return
+  The class "rstream.mrg32k3a" provides the following methods for
+  handling "rstream.mrg32k3a" objects. Some methods that return
   parameters of the stream object have a variant that uses \code{<-} to
   change the respective parameters. See the man pages for the respective
   methods for details.
@@ -63,56 +59,56 @@
   Methods to use the stream:
   
   \describe{
-    \item{rstream.sample}{\code{signature(object = "rstream.lecuyer")}: 
+    \item{rstream.sample}{\code{signature(object = "rstream.mrg32k3a")}: 
       Get a random sample from the stream object.}
-    \item{r}{\code{signature(object = "rstream.lecuyer")}:
+    \item{r}{\code{signature(object = "rstream.mrg32k3a")}:
       Same as \code{rstream.sample}.}
-    \item{rstream.reset}{\code{signature(object = "rstream.lecuyer")}:
+    \item{rstream.reset}{\code{signature(object = "rstream.mrg32k3a")}:
       Reset stream into initial state.}
-    \item{rstream.nextsubstream}{\code{signature(object = "rstream.lecuyer")}:
+    \item{rstream.nextsubstream}{\code{signature(object = "rstream.mrg32k3a")}:
       Set state of stream to next substream.}
-    \item{rstream.resetsubstream}{\code{signature(object = "rstream.lecuyer")}:
+    \item{rstream.resetsubstream}{\code{signature(object = "rstream.mrg32k3a")}:
       Reset current substream into starting state.}
   }
 
   Antithetic random streams and increased precision:
   \describe{
-    \item{rstream.antithetic}{\code{signature(object = "rstream.lecuyer")}:
+    \item{rstream.antithetic}{\code{signature(object = "rstream.mrg32k3a")}:
       Whether or not the stream object returns antithetic random
       numbers.}
-    \item{rstream.antithetic<-}{\code{signature(object = "rstream.lecuyer")}:
+    \item{rstream.antithetic<-}{\code{signature(object = "rstream.mrg32k3a")}:
       Change antithetic flag (\code{TRUE} or \code{FALSE}).}
-    \item{rstream.incprecision}{\code{signature(object = "rstream.lecuyer")}:
+    \item{rstream.incprecision}{\code{signature(object = "rstream.mrg32k3a")}:
       Whether or not the stream object returns random numbers with
       increased precision.}
-    \item{rstream.incprecision<-}{\code{signature(object = "rstream.lecuyer")}:
+    \item{rstream.incprecision<-}{\code{signature(object = "rstream.mrg32k3a")}:
       Change flag for increased precision (\code{TRUE} or \code{FALSE}).}
   }
 
-  Handling "rstream.lecuyer" objects:
+  Handling "rstream.mrg32k3a" objects:
 
   \describe{
-    \item{print}{\code{signature(x = "rstream.lecuyer")}:
+    \item{print}{\code{signature(x = "rstream.mrg32k3a")}:
       Print state of the stream object.}
-    \item{rstream.name}{\code{signature(object = "rstream.lecuyer")}:
+    \item{rstream.name}{\code{signature(object = "rstream.mrg32k3a")}:
       The name of the stream object.}
-    \item{rstream.name<-}{\code{signature(object = "rstream.lecuyer")}:
+    \item{rstream.name<-}{\code{signature(object = "rstream.mrg32k3a")}:
       Change the name of the stream object.}
-    \item{rstream.clone}{\code{signature(object = "rstream.lecuyer")}:
+    \item{rstream.clone}{\code{signature(object = "rstream.mrg32k3a")}:
       Make a copy (clone) of stream object.}
-    \item{initialize}{\code{signature(.Object = "rstream.lecuyer")}:
+    \item{initialize}{\code{signature(.Object = "rstream.mrg32k3a")}:
       Initialize rstream object. (For Internal usage only).}
   }
 
-  When a "rstream.lecuyer" object should be used in another \R session
+  When a "rstream.mrg32k3a" object should be used in another \R session
   or saved for some kind of later reuse all information about the
   object must be packed. Notice no method other than unpacking can be
   applied to a packed object. It must be unpacked before.
 
   \describe{
-    \item{rstream.packed}{\code{signature(object = "rstream.lecuyer")}:
+    \item{rstream.packed}{\code{signature(object = "rstream.mrg32k3a")}:
       Whether or not the stream object is packed.}
-    \item{rstream.packed<-}{\code{signature(object = "rstream.lecuyer")}:
+    \item{rstream.packed<-}{\code{signature(object = "rstream.mrg32k3a")}:
       Pack or unpack object: set packed to \code{TRUE} or \code{FALSE}.}
   }
 }
@@ -143,9 +139,9 @@
 \section{Warning }{
   The underlying RngStreams library uses a global variable to store the
   package seed. This variable is also stored inside \R. Whenever a new
-  instance of a "rstream.lecuyer" object is created the value of global
+  instance of a "rstream.mrg32k3a" object is created the value of global
   variable is set to the value of the \R object. Thus there is no
-  problem when such "rstream.lecuyer" objects are packed for using in
+  problem when such "rstream.mrg32k3a" objects are packed for using in
   later \R sessions. However, if such packed objects are not stored in
   the workspace image, then the \R variable gets lost and there is a
   (extremely small) chance that newly created objects are not
@@ -154,7 +150,6 @@
 
 \seealso{%
   \code{\link{rstream-class}},
-  \code{\link{rstream.mrg32k3a-class}},
   \code{\link{rstream.antithetic-methods}},
   \code{\link{rstream.clone-methods}},
   \code{\link{rstream.incprecision-methods}},
@@ -166,8 +161,8 @@
   \code{\link{rstream.RNG}}.
 }
 \examples{
-## create a new rstream.lecuyer object
-s <- new("rstream.lecuyer")
+## create a new rstream.mrg32k3a object
+s <- new("rstream.mrg32k3a")
 
 ## show state of this object
 print(s)

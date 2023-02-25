@@ -18,4 +18,4 @@ exportMethods(initialize)
 
 export(rstream.RNG)
 
-exportClass(rstream, rstream.lecuyer, rstream.runif)
+exportClass(rstream, rstream.mrg32k3a, rstream.lecuyer, rstream.runif)

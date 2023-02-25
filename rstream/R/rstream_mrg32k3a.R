@@ -1,6 +1,6 @@
 #############################################################################
 ##                                                                         ##
-##   Class: rstream.lecuyer                                                ##
+##   Class: rstream.mrg32k3a                                               ##
 ##                                                                         ##
 #############################################################################
 ##                                                                         ##
@@ -11,26 +11,26 @@
 
 ## Initialize global variables ----------------------------------------------
 
-.rstream.lecuyer.init <- function () {
+.rstream.mrg32k3a.init <- function () {
 
 	## Indicate whether a package seed is already set
-	if (!exists(".rstream.lecuyer.HasSeed", envir=.rstream.envir))
-		assign(".rstream.lecuyer.HasSeed", FALSE, envir=.rstream.envir)
+	if (!exists(".rstream.mrg32k3a.HasSeed", envir=.rstream.envir))
+		assign(".rstream.mrg32k3a.HasSeed", FALSE, envir=.rstream.envir)
 
 	## Default Package seed
-	if (!exists(".rstream.lecuyer.DefaultSeed", envir=.rstream.envir))
-		assign(".rstream.lecuyer.DefaultSeed", rep(as.double(Sys.time()),6), envir=.rstream.envir)
+	if (!exists(".rstream.mrg32k3a.DefaultSeed", envir=.rstream.envir))
+		assign(".rstream.mrg32k3a.DefaultSeed", rep(as.double(Sys.time()),6), envir=.rstream.envir)
 }
 
 
 ## Class --------------------------------------------------------------------
 
-setClass( "rstream.lecuyer", representation(), contains = "rstream" )
+setClass( "rstream.mrg32k3a", representation(), contains = "rstream" )
 
 
 ## Initialize ---------------------------------------------------------------
 
-setMethod( "initialize", "rstream.lecuyer",  
+setMethod( "initialize", "rstream.mrg32k3a",  
           function(.Object, name=NULL, seed=NULL, force.seed=FALSE, 
                    antithetic=FALSE, incprecision=FALSE) {
 
@@ -40,10 +40,10 @@ setMethod( "initialize", "rstream.lecuyer",
 
                   ## name of the Rstream object.
                   ## by default we use type + number
-                  if (is.null(name)) name <- paste("lecuyer", count, sep="")
+                  if (is.null(name)) name <- paste("mrg32k3a", count, sep="")
 
                   ## type of Rstream object
-                  .Object@type <- "lecuyer"
+                  .Object@type <- "mrg32k3a"
 
                   ## add info about Rstream type
                   .Object@info <- "RngStreams - library for multiple independent streams of Random Numbers"
@@ -52,13 +52,13 @@ setMethod( "initialize", "rstream.lecuyer",
                   .Object@is.packed <- FALSE 
 
                   ## set (package) seed
-                  hasSeed <- get(".rstream.lecuyer.HasSeed", envir=.rstream.envir)
-                  defaultSeed <- get(".rstream.lecuyer.DefaultSeed", envir=.rstream.envir)
+                  hasSeed <- get(".rstream.mrg32k3a.HasSeed", envir=.rstream.envir)
+                  defaultSeed <- get(".rstream.mrg32k3a.DefaultSeed", envir=.rstream.envir)
                   if (!is.null(seed) && !force.seed && hasSeed)
-                          stop("rstream.lecuyer: Package already seeded! Seed ignored!\n",
-                               "rstream.lecuyer: Set force.seed = TRUE if you really want to reseed.")
+                          stop("rstream.mrg32k3a: Package already seeded! Seed ignored!\n",
+                               "rstream.mrg32k3a: Set force.seed = TRUE if you really want to reseed.")
                   if (is.null(seed)) seed <- defaultSeed
-                  seed <- .rstream.lecuyer.CheckSeed(seed)
+                  seed <- .rstream.mrg32k3a.CheckSeed(seed)
                   .Call("R_RngStreams_SetPackageSeed", as.double(seed), PACKAGE="rstream")
 
                   ## Create Rstream object
@@ -67,9 +67,9 @@ setMethod( "initialize", "rstream.lecuyer",
                   .Call("R_RngStreams_SetIncreasedPrecis", .Object@stream, as.integer(incprecision), PACKAGE="rstream")
 
                   ## save seed as R variavble
-                  assign(".rstream.lecuyer.DefaultSeed",
+                  assign(".rstream.mrg32k3a.DefaultSeed",
                          as.numeric(.Call("R_RngStreams_GetPackageSeed", PACKAGE="rstream")), envir=.rstream.envir)
-                  assign(".rstream.lecuyer.HasSeed", TRUE, envir=.rstream.envir)
+                  assign(".rstream.mrg32k3a.HasSeed", TRUE, envir=.rstream.envir)
 
                   ## return new Rstream object
                   .Object
@@ -78,14 +78,14 @@ setMethod( "initialize", "rstream.lecuyer",
 
 ## Validity -----------------------------------------------------------------
 
-## .rstream.lecuyer.CheckSeed
+## .rstream.mrg32k3a.CheckSeed
 ##    make simple check on given seed
-.rstream.lecuyer.CheckSeed <- function(seed) {
+.rstream.mrg32k3a.CheckSeed <- function(seed) {
 	ll <- length(seed)
 	if (ll < 6)
-		stop("rstream.lecuyer: seed too short; 6 numbers required")
+		stop("rstream.mrg32k3a: seed too short; 6 numbers required")
 	if (ll > 6) {
-		warning("rstream.lecuyer: seed too long; truncated") 
+		warning("rstream.mrg32k3a: seed too long; truncated") 
 		seed<-seed[1:6] }
 ###	for (i in 1:6)
 ###		if (seed[i] < 0) 
@@ -100,7 +100,7 @@ setMethod( "initialize", "rstream.lecuyer",
 
 ## rstream.name
 ##    get and set name of Rstream object
-setMethod("rstream.name", "rstream.lecuyer", 
+setMethod("rstream.name", "rstream.mrg32k3a", 
           function(stream) { 
                   if (stream@is.packed) 
                           return (stream@pack$name)
@@ -108,7 +108,7 @@ setMethod("rstream.name", "rstream.lecuyer",
                           return (.Call("R_RngStreams_GetName", stream@stream, PACKAGE="rstream")) 
           } )
 
-setReplaceMethod("rstream.name", "rstream.lecuyer", 
+setReplaceMethod("rstream.name", "rstream.mrg32k3a",
                  function(stream, value) {
                          if (stream@is.packed) stop("Cannot change name for PACKED Rstream") 
                          .Call("R_RngStreams_SetName", stream@stream, as.character(value), PACKAGE="rstream")
@@ -118,7 +118,7 @@ setReplaceMethod("rstream.name", "rstream.lecuyer",
 
 ## rstream.antithetic
 ##   get and set flag for antithetic random numbers:  
-setMethod("rstream.antithetic", "rstream.lecuyer", 
+setMethod("rstream.antithetic", "rstream.mrg32k3a", 
           function(stream) {
                   if (stream@is.packed) 
                           return (stream@pack$anti)
@@ -126,7 +126,7 @@ setMethod("rstream.antithetic", "rstream.lecuyer",
                           return (as.logical(.Call("R_RngStreams_GetAntithetic", stream@stream, PACKAGE="rstream")))
           } )
 
-setReplaceMethod("rstream.antithetic", "rstream.lecuyer",
+setReplaceMethod("rstream.antithetic", "rstream.mrg32k3a",
                  function(stream, value) { 
                          if (stream@is.packed) stop("Cannot change antithetic flag for PACKED Rstream") 
                          .Call("R_RngStreams_SetAntithetic", stream@stream, as.integer(value), PACKAGE="rstream")
@@ -136,7 +136,7 @@ setReplaceMethod("rstream.antithetic", "rstream.lecuyer",
 
 ## rstream.incprecision
 ##    get and set flag for increased precision of random numbers
-setMethod("rstream.incprecision", "rstream.lecuyer", 
+setMethod("rstream.incprecision", "rstream.mrg32k3a", 
           function(stream) {
                   if (stream@is.packed) 
                           return (stream@pack$incp)
@@ -144,7 +144,7 @@ setMethod("rstream.incprecision", "rstream.lecuyer",
                           return (as.logical(.Call("R_RngStreams_GetIncreasedPrecis", stream@stream, PACKAGE="rstream")))
           } )
 
-setReplaceMethod("rstream.incprecision", "rstream.lecuyer",
+setReplaceMethod("rstream.incprecision", "rstream.mrg32k3a",
                  function(stream, value) { 
                          if (stream@is.packed) stop("Cannot change increased precision flag for PACKED Rstream") 
                          .Call("R_RngStreams_SetIncreasedPrecis", stream@stream, as.integer(value), PACKAGE="rstream")
@@ -156,12 +156,12 @@ setReplaceMethod("rstream.incprecision", "rstream.lecuyer",
 
 ## rstream.sample
 ##    make a random sample
-setMethod("rstream.sample", c("rstream.lecuyer","numeric"), 
+setMethod("rstream.sample", c("rstream.mrg32k3a","numeric"), 
           function(stream,n=1) { 
                   if (stream@is.packed) stop("Cannot sample from PACKED Rstream") 
                   .Call("R_RngStreams_Sample", stream@stream, as.integer(n), PACKAGE="rstream") } )
 
-setMethod("r", c("rstream.lecuyer","numeric"), 
+setMethod("r", c("rstream.mrg32k3a","numeric"), 
           function(stream,n=1) { 
                   if (stream@is.packed) stop("Cannot sample from PACKED Rstream") 
                   .Call("R_RngStreams_Sample", stream@stream, as.integer(n), PACKAGE="rstream") } )
@@ -173,7 +173,7 @@ setMethod("r", c("rstream.lecuyer","numeric"),
 ##   reset current substream of Rstream object
 if(!isGeneric("rstream.resetsubstream"))
         setGeneric("rstream.resetsubstream", function(stream) standardGeneric("rstream.resetsubstream"))
-setMethod("rstream.resetsubstream", "rstream.lecuyer", 
+setMethod("rstream.resetsubstream", "rstream.mrg32k3a", 
           function(stream) { 
                   if (stream@is.packed) stop("Cannot reset PACKED Rstream") 
                   dummy <- .Call("R_RngStreams_ResetStartSubstream", stream@stream, PACKAGE="rstream")
@@ -184,7 +184,7 @@ setMethod("rstream.resetsubstream", "rstream.lecuyer",
 ##   skip to next substream of Rstream object
 if(!isGeneric("rstream.nextsubstream"))
         setGeneric("rstream.nextsubstream", function(stream) standardGeneric("rstream.nextsubstream"))
-setMethod("rstream.nextsubstream", "rstream.lecuyer", 
+setMethod("rstream.nextsubstream", "rstream.mrg32k3a", 
           function(stream) { 
                   if (stream@is.packed) stop("Cannot skip substream of PACKED Rstream") 
                   dummy <- .Call("R_RngStreams_ResetNextSubstream", stream@stream, PACKAGE="rstream")
@@ -195,7 +195,7 @@ setMethod("rstream.nextsubstream", "rstream.lecuyer",
 
 ## rstream.reset
 ##   reset Rstream object
-setMethod("rstream.reset", "rstream.lecuyer", 
+setMethod("rstream.reset", "rstream.mrg32k3a", 
           function(stream) { 
                   if (stream@is.packed) stop("Cannot reset PACKED Rstream") 
                   dummy <- .Call("R_RngStreams_ResetStartStream", stream@stream, PACKAGE="rstream")
@@ -204,7 +204,7 @@ setMethod("rstream.reset", "rstream.lecuyer",
 
 ## rstream.clone
 ##    clone (copy) Rstream object
-setMethod("rstream.clone", "rstream.lecuyer", 
+setMethod("rstream.clone", "rstream.mrg32k3a", 
           function(stream) { 
                   if (stream@is.packed) stop("Cannot clone PACKED Rstream") 
                   clone <- stream
@@ -217,7 +217,7 @@ setMethod("rstream.clone", "rstream.lecuyer",
 ## rstream.pack, rstream.unpack
 ##    pack and unpack Rstream object such that all data are contained in R object
 ##    (and can be easily copied within R)
-setReplaceMethod("rstream.packed", "rstream.lecuyer", 
+setReplaceMethod("rstream.packed", "rstream.mrg32k3a", 
                  function(stream, value) {
                          value <- as.logical(value)
                          if (value && stream@is.packed)   return(stream)
@@ -245,7 +245,7 @@ setReplaceMethod("rstream.packed", "rstream.lecuyer",
 
 ## print:
 ##    print all data of a Rstream object
-setMethod( "print", "rstream.lecuyer",
+setMethod( "print", "rstream.mrg32k3a",
           function(x, ...) { 
                   .rstream.PrintData(x) 
                   if (!x@is.packed) {
@@ -267,14 +267,14 @@ setMethod( "print", "rstream.lecuyer",
 ## .rstream.getRNG
 ##    get Rstream object for current R generator
 ##    (internal method; not exported)
-setMethod(".rstream.getRNG", "rstream.lecuyer", 
+setMethod(".rstream.getRNG", "rstream.mrg32k3a", 
           function(stream) { rstream.clone(stream) } )
 
 
 ## .rstream.setRNG
 ##    set R generator to given Rstream object
 ##    (internal method; not exported)
-setMethod(".rstream.setRNG", "rstream.lecuyer", 
+setMethod(".rstream.setRNG", "rstream.mrg32k3a", 
           function(stream) {
                   .Call("R_RngStreams_setRNG", stream@stream, PACKAGE="rstream")
                   RNGkind(kind="user-supplied")
