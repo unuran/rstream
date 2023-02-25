@@ -30,8 +30,8 @@ clone <- rstream.clone(stream)
 
 \section{Methods}{
   Methods available for all "rstream" subclasses:
-  \code{\link{rstream.mrg32k3a-class}},
-  \code{\link{rstream.runif-class}}.
+  \code{\linkS4class{rstream.mrg32k3a}},
+  \code{\linkS4class{rstream.runif}}.
 }
 
 \note{
@@ -39,8 +39,10 @@ clone <- rstream.clone(stream)
   the original object from its copy.
 }
 
+\author{Josef Leydold \email{josef.leydold@wu.ac.at}}
+
 \seealso{%
-  \code{\link{rstream-class}}.
+  \code{\linkS4class{rstream}}.
 }
 
 \examples{

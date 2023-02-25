@@ -40,11 +40,13 @@ rstream.incprecision(stream) <- value
 
 \section{Methods}{
   Methods available for the following "rstream" subclasses:
-  \code{\link{rstream.mrg32k3a-class}}.
+  \code{\linkS4class{rstream.mrg32k3a}}.
 }
 
+\author{Josef Leydold \email{josef.leydold@wu.ac.at}}
+
 \seealso{%
-  \code{\link{rstream-class}}.
+  \code{\linkS4class{rstream}}.
 }
 
 \examples{

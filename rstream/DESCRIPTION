@@ -2,8 +2,8 @@ Package: rstream
 Version: 1.2.5
 Date: 2010-05-05
 Title: Streams of random numbers
-Author: Josef Leydold <leydold@statmath.wu.ac.at>
-Maintainer: Josef Leydold <leydold@statmath.wu.ac.at>
+Author: Josef Leydold <josef.leydold@wu.ac.at>
+Maintainer: Josef Leydold <josef.leydold@wu.ac.at>
 Depends: R (>= 2.0.0), methods
 Description: Unified object oriented interface for multiple independent streams of random numbers from different sources.
 License: GPL-2

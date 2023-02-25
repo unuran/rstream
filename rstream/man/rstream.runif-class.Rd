@@ -98,7 +98,8 @@
   }
 }
 
-\author{Josef Leydold (leydold@statmath.wu.ac.at)}
+\author{Josef Leydold \email{josef.leydold@wu.ac.at}}
+
 \note{
   The slots of this class must not be accessed directly. Use
   the above methods instead.
@@ -117,7 +118,7 @@
 }
 
 \seealso{%
-  \code{\link{rstream-class}},
+  \code{\linkS4class{rstream}},
   \code{\link{rstream.antithetic-methods}},
   \code{\link{rstream.clone-methods}},
   \code{\link{rstream.name-methods}},

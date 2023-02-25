@@ -40,10 +40,10 @@ The interface to these classes is inspired by Pierre L'Ecuyers
 RngStreams package.
 
 For an overview of classes and methods, see
-\code{\link{rstream-class}}.
+\code{\linkS4class{rstream}}.
 }
 
-\author{Josef Leydold <leydold@statmath.wu.ac.at>}
+\author{Josef Leydold \email{josef.leydold@wu.ac.at}}
 
 \references{
   P. L'Ecuyer and J. Leydold (2005):
@@ -52,7 +52,7 @@ For an overview of classes and methods, see
 }
 
 \seealso{
-  \code{\link{rstream-class}}.
+  \code{\linkS4class{rstream}}.
 }
 
 \keyword{distribution}

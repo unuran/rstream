@@ -121,7 +121,7 @@
     and substreams}. Operations Research 50(6), 1073-1075.
 }
 
-\author{Josef Leydold (leydold@statmath.wu.ac.at)}
+\author{Josef Leydold \email{josef.leydold@wu.ac.at}}
 
 \note{%
   "rstream" objects cannot simply be copied by \code{<-}. The new
@@ -150,8 +150,8 @@
 }
 
 \seealso{
-  \code{\link{rstream.mrg32k3a-class}},
-  \code{\link{rstream.runif-class}}.
+  \code{\linkS4class{rstream.mrg32k3a}},
+  \code{\linkS4class{rstream.runif}}.
   \code{\link{rstream.antithetic-methods}},
   \code{\link{rstream.clone-methods}},
   \code{\link{rstream.incprecision-methods}},
