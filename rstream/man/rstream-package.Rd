@@ -15,8 +15,8 @@
 \tabular{ll}{
 Package: \tab rstream\cr
 Type: \tab Package\cr
-Version: \tab 1.2.4         \cr
-Date: \tab 2009-11-17    \cr
+Version: \tab 1.2.5         \cr
+Date: \tab 2010-05-05    \cr
 License: \tab GPL 2 or later\cr
 }
 
