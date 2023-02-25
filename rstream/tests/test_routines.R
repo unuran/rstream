@@ -14,8 +14,13 @@
 
 ## Test Parameters ----------------------------------------------------------
 
+## API
 if (!exists("samplesize")) samplesize <- 1e4
 if (!exists("streamname")) streamname <- "testname"
+
+## Goodness-of-Fit tests
+if (!exists("chi2.samplesize"))  chi2.samplesize <- 1e6
+if (!exists("alpha"))            alpha <- 1.e-3
 
 
 ## Load library -------------------------------------------------------------
@@ -43,7 +48,7 @@ rstream.check.API <- function (
 
 	## Print ............................................................
 	print(s)
-
+        
         
 	## Sample ...........................................................
 	x <- rstream.sample(s,samplesize)
@@ -245,9 +250,48 @@ comp_states <- function(stateA, stateB, anti=FALSE, clone=FALSE) {
 } # end of comp_states()
 
 
+## --- Function for running chi^2 goodness-of-fit test ----------------------
+
+rstream.check.chi2 <- function (type, ...) {
+        ##  Run a chi^2 test and evaluate p-value.
+        ##  
+        ##  type   ...  type (class) of stream 
+        ##  ...    ...  optional args for new(...)
+        ##
+        
+	## -- Create a stream 
+	s <- new (type, ...)
+        print(s)
+
+        ## -- Draw sample 
+	u <- rstream.sample(s,chi2.samplesize)
+	if (length(u) != chi2.samplesize)
+		stop("chi2: sample.rstream failed")
+
+        ## -- make histogram of with equalsized bins (classified data)
+        nbins <- as.integer(sqrt(chi2.samplesize))
+        breaks <- (0:nbins)/nbins
+        h <- hist(u,plot=F,breaks=breaks)$count
+        ## -- run unur.chiq.test
+        pval <- chisq.test(h)$p.value
+        ## -- check p-value
+        if (pval > alpha) { # test passed
+                message("chi2 test PASSed with p-value=",signif(pval))
+        }
+        else {
+                stop("chi2 test FAILED!  p-value=",signif(pval), call.=FALSE)
+        }
+} ## --- end of rstream.check.chi2() ---
+
+
+#############################################################################
+##                                                                          #
+##  Auxiliary routines                                                      #
+##                                                                          #
+#############################################################################
+
 ## Test whether there is an error -------------------------------------------
 
 iserror <- function (expr) { is(try(expr), "try-error") }
 
-
-## End ----------------------------------------------------------------------
+## -- End -------------------------------------------------------------------
