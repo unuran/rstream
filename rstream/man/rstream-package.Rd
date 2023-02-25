@@ -16,7 +16,7 @@
 Package: \tab rstream\cr
 Type: \tab Package\cr
 Version: \tab 1.2.2\cr
-Date: \tab 2007-05-01\cr
+Date: \tab 2007-09-10\cr
 License: \tab GPL 2 or later\cr
 }
 

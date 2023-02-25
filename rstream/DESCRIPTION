@@ -1,6 +1,6 @@
 Package: rstream
-Version: 1.2.1
-Date: 2006-02-15
+Version: 1.2.2
+Date: 2007-09-10
 Title: Streams of random numbers
 Author: Josef Leydold <leydold@statistik.wu-wien.ac.at>
 Maintainer: Josef Leydold <leydold@statistik.wu-wien.ac.at>
