@@ -2,6 +2,7 @@
 \docType{class}
 \alias{rstream-class}
 \alias{print,rstream-method}
+\alias{show,rstream-method}
 
 \title{Class "rstream" -- Multiple streams of uniform random numbers}
 
@@ -91,6 +92,8 @@
   \describe{
     \item{print}{\code{signature(x = "rstream")}:
       Print state of the stream object.}
+    \item{show}{\code{signature(x = "rstream")}:
+      Same as \code{print}.}
     \item{rstream.name}{\code{signature(object = "rstream")}:
       The name of the stream object.}
     \item{rstream.name<-}{\code{signature(object = "rstream")}:
@@ -161,3 +164,5 @@
 }
 
 \keyword{classes}
+\keyword{distribution}
+\keyword{datagen}

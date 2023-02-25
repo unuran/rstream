@@ -67,3 +67,5 @@ rstream.packed(s) <- FALSE
 }
 
 \keyword{methods}
+\keyword{distribution}
+\keyword{datagen}

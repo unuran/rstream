@@ -24,7 +24,15 @@ rstream.check.API("rstream.lecuyer")
 rstream.check.setRNG("rstream.lecuyer")
 
 
-## Special tests -----------------------------------------------------------
+## Check: Goodness-of-fit ---------------------------------------------------
+
+## Chi^2 goodness-of-fit test
+rstream.check.chi2("rstream.lecuyer")
+rstream.check.chi2("rstream.lecuyer", antithetic=TRUE)
+rstream.check.chi2("rstream.lecuyer", incprecision=TRUE)
+
+
+## Special tests ------------------------------------------------------------
 
 ## it must not be possible to reset the seed without flag 'force.seed'
 if( ! iserror( new("rstream.lecuyer", seed=rep(12345,6)) ) )

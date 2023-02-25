@@ -14,6 +14,7 @@ exportMethods(rstream.clone)
 exportMethods(rstream.packed, "rstream.packed<-")
 
 exportMethods(print)
+exportMethods(show)
 exportMethods(initialize)
 
 export(rstream.RNG)

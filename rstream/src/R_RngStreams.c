@@ -9,7 +9,7 @@
  *                                                                           *
  *****************************************************************************/
 
-/* $Id: R_RngStreams.c,v 1.13 2004/10/21 11:01:03 leydold Exp $ */
+/* $Id: R_RngStreams.c 10 2007-09-10 07:54:34Z leydold $ */
 
 /*---------------------------------------------------------------------------*/
 
@@ -35,7 +35,7 @@ static void R_RngStreams_free (SEXP R_stream);
     } while (0)
 
 #define CHECK_NULL(s) do { \
-    if ((s)==NULL) error("invalid NULL pointer\n"); } while(0)
+    if ((s)==NULL) error("invalid NULL pointer in %s, line %d\n",__FILE__,__LINE__); } while(0)
 
 /*---------------------------------------------------------------------------*/
 
@@ -107,12 +107,13 @@ SEXP R_RngStreams_GetPackageSeed (void)
 
 /*---------------------------------------------------------------------------*/
 
-SEXP R_RngStreams_Init (SEXP R_name)
+SEXP R_RngStreams_Init (SEXP R_obj, SEXP R_name)
      /*----------------------------------------------------------------------*/
      /* Create and initialize Stream generator object.                       */
      /*                                                                      */
      /* parameters:                                                          */
-     /*   R_name ... (string) ... name of the Stream                         */
+     /*   obj    ... (S4 class) ... rstream object                           */ 
+     /*   R_name ... (string)   ... name of the Stream                       */
      /*                                                                      */
      /* return:                                                              */
      /*   pointer to Stream object                                           */
@@ -140,7 +141,7 @@ SEXP R_RngStreams_Init (SEXP R_name)
     error("cannot create Stream object\n");
 
   /* make R external pointer and store pointer to Stream generator */
-  PROTECT(R_newstream = R_MakeExternalPtr(newstream, RngStreams_tag, R_NilValue));
+  PROTECT(R_newstream = R_MakeExternalPtr(newstream, RngStreams_tag, R_obj));
   UNPROTECT(1);
   
   /* register destructor as C finalizer */
@@ -404,7 +405,7 @@ void R_RngStreams_free (SEXP R_stream)
 
   /* Extract pointer to generator */
   stream = R_ExternalPtrAddr(R_stream);
-  CHECK_NULL(stream);
+  if (stream == NULL) return;
 
   /* free generator object */
   RngStream_DeleteStream (&stream);
@@ -431,13 +432,14 @@ SEXP R_RngStreams_Free (SEXP R_stream)
 
 /*---------------------------------------------------------------------------*/
 
-SEXP R_RngStreams_Clone (SEXP R_stream, SEXP R_name)
+SEXP R_RngStreams_Clone (SEXP R_obj, SEXP R_stream, SEXP R_name)
      /*----------------------------------------------------------------------*/
      /* Make a clone (copy) of Stream object.                                */
      /*                                                                      */
      /* parameters:                                                          */
-     /*   R_stream ... (pointer) ... pointer the Stream object               */
-     /*   R_name   ... (string) ... name of the Stream                       */
+     /*   obj      ... (S4 class) ... rstream object                         */ 
+     /*   R_stream ... (pointer)  ... pointer the Stream object              */
+     /*   R_name   ... (string)   ... name of the Stream                     */
      /*                                                                      */
      /* return:                                                              */
      /*   pointer to cloned Stream object                                    */
@@ -476,7 +478,7 @@ SEXP R_RngStreams_Clone (SEXP R_stream, SEXP R_name)
   strncpy(clone->name, name, len+1);
 
   /* make R external pointer and store pointer to Stream generator */
-  PROTECT(R_clone = R_MakeExternalPtr(clone, RngStreams_tag, R_NilValue));
+  PROTECT(R_clone = R_MakeExternalPtr(clone, RngStreams_tag, R_obj));
   UNPROTECT(1);
   
   /* register destructor as C finalizer */
@@ -502,7 +504,8 @@ SEXP R_RngStreams_SetName (SEXP R_stream, SEXP R_name)
      /*----------------------------------------------------------------------*/
 {
   RngStream stream;
-  char *name, *newname;
+  const char *name;
+  char *newname;
   size_t len;
 
   /* check pointer */
@@ -603,12 +606,14 @@ SEXP R_RngStreams_GetData (SEXP R_stream)
 
 /*---------------------------------------------------------------------------*/
 
-SEXP R_RngStreams_SetData (SEXP R_stream_data, SEXP R_name)
+SEXP R_RngStreams_SetData (SEXP R_obj, SEXP R_stream, SEXP R_stream_data, SEXP R_name)
      /*----------------------------------------------------------------------*/
      /* Create and initialize Stream generator object and                    */
      /* set data structure of Stream object.                                 */
      /*                                                                      */
      /* parameters:                                                          */
+     /*   obj           ... (S4 class)   ... rstream object                  */ 
+     /*   R_stream      ... (pointer)    ... pointer the Stream object       */
      /*   R_stream_data ... (double[20]) ... pointer the Stream object       */
      /*   R_name        ... (string)     ... name of the Stream              */
      /*                                                                      */
@@ -653,15 +658,14 @@ SEXP R_RngStreams_SetData (SEXP R_stream_data, SEXP R_name)
   strncpy(newstream->name, name, len+1);
   UNPROTECT(1);
 
-  /* make R external pointer and store pointer to Stream generator */
-  PROTECT(R_newstream = R_MakeExternalPtr(newstream, RngStreams_tag, R_NilValue));
-  UNPROTECT(1);
-  
-  /* register destructor as C finalizer */
-  R_RegisterCFinalizer(R_newstream, R_RngStreams_free);
-
-  /* return Stream object to R */
-  return R_newstream;
+  /* store pointer to Stream generator in R external pointer */
+  R_SetExternalPtrAddr(R_stream, newstream);
+  /* ... and reset the protector just in case R_obj is different from the */
+  /*   orignal protector of R_stream                                      */
+  R_SetExternalPtrProtected(R_stream, R_obj);
+    
+  /* There is no need to return an object to R */
+  return R_NilValue;
 
 } /* end of R_RngStreams_SetData() */
 

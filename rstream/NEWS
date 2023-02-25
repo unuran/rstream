@@ -1,3 +1,11 @@
+Version 1.2.2: 2007-09-10
+
+	- added method 'show' (just calls 'print')
+
+	- Bug fixes:
+	    . added protector for external pointer
+            . avoid nonessential compiler warning with R version 2.6.0
+
 Version 1.2.1: 2006-09-21
 
 	- Fixed DESCRIPTION file for upcoming R-2.4.0 release

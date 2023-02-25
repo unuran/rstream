@@ -200,4 +200,7 @@ rstream.packed(s) <- TRUE
 rstream.packed(s) <- FALSE
 
 }
+
 \keyword{classes}
+\keyword{distribution}
+\keyword{datagen}

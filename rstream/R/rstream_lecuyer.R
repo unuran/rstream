@@ -62,7 +62,7 @@ setMethod( "initialize", "rstream.lecuyer",
                   .Call("R_RngStreams_SetPackageSeed", as.double(seed), PACKAGE="rstream")
 
                   ## Create Rstream object
-                  .Object@stream <- .Call("R_RngStreams_Init", as.character(name), PACKAGE="rstream")
+                  .Object@stream <- .Call("R_RngStreams_Init", .Object, as.character(name), PACKAGE="rstream")
                   .Call("R_RngStreams_SetAntithetic", .Object@stream, as.integer(antithetic), PACKAGE="rstream")
                   .Call("R_RngStreams_SetIncreasedPrecis", .Object@stream, as.integer(incprecision), PACKAGE="rstream")
 
@@ -209,7 +209,7 @@ setMethod("rstream.clone", "rstream.lecuyer",
                   if (stream@is.packed) stop("Cannot clone PACKED Rstream") 
                   clone <- stream
                   name <- paste(rstream.name(stream),".",sep="")
-                  clone@stream <- .Call("R_RngStreams_Clone", stream@stream, name, PACKAGE="rstream")
+                  clone@stream <- .Call("R_RngStreams_Clone", clone, stream@stream, name, PACKAGE="rstream")
                   clone
           } )
 
@@ -231,12 +231,15 @@ setReplaceMethod("rstream.packed", "rstream.lecuyer",
                                  stream@pack$state <- as.double(.Call("R_RngStreams_GetData", stream@stream, PACKAGE="rstream"))
                                  stream@pack$name <- name 
                                  stream@pack$anti <- anti
-                                 stream@pack$incp <- incp }
+                                 stream@pack$incp <- incp
+                                 .Call("R_RngStreams_Free", stream@stream, PACKAGE="rstream")
+                         }
                          else {		# unpack
                                  stream@is.packed <- FALSE
-                                 stream@stream <- .Call("R_RngStreams_SetData", 
-                                                        stream@pack$state,
-                                                        stream@pack$name, PACKAGE="rstream") }
+                                 .Call("R_RngStreams_SetData", stream,
+                                       stream@stream, stream@pack$state,
+                                       stream@pack$name, PACKAGE="rstream")
+                         }
                          stream
                  } )
 

@@ -56,3 +56,5 @@ rstream.name(s)
 }
 
 \keyword{methods}
+\keyword{distribution}
+\keyword{datagen}

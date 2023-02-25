@@ -24,6 +24,14 @@ rstream.check.API("rstream.mrg32k3a")
 rstream.check.setRNG("rstream.mrg32k3a")
 
 
+## Check: Goodness-of-fit ---------------------------------------------------
+
+## Chi^2 goodness-of-fit test
+rstream.check.chi2("rstream.mrg32k3a")
+rstream.check.chi2("rstream.mrg32k3a", antithetic=TRUE)
+rstream.check.chi2("rstream.mrg32k3a", incprecision=TRUE)
+
+
 ## Special tests -----------------------------------------------------------
 
 ## it must not be possible to reset the seed without flag 'force.seed'

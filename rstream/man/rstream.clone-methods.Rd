@@ -52,3 +52,5 @@ clone <- rstream.clone(s)
 }
 
 \keyword{methods}
+\keyword{distribution}
+\keyword{datagen}
