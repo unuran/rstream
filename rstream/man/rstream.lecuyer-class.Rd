@@ -29,7 +29,7 @@
   \code{new("rstream.lecuyer", name, seed, force.seed, antithetic,
     incprecision)}.
 
-  \itemize{
+  \describe{
     \item{name:}{An arbitrary string to name the stream object.
       If omitted a string that consists of \code{lecuyer} and some
       number (which is increased every time when a new \emph{rstream}

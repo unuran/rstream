@@ -25,7 +25,7 @@
   \code{new("rstream.mrg32k3a", name, seed, force.seed, antithetic,
     incprecision)}.
 
-  \itemize{
+  \describe{
     \item{name:}{An arbitrary string to name the stream object.
       If omitted a string that consists of \code{mrg32k3a} and some
       number (which is increased every time when a new \emph{rstream}
