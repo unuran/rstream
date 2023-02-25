@@ -1,20 +1,48 @@
 
+Version 1.3.0: 2011-02-10
+
+	- fixed bug: when rstream.RNG(s) was called with an 'rstream'
+          object of class "rstream.mrg32k3a" two of more times
+          consecutively, then the first element of the second the
+          generated stream was discarded.
+	  This has been fixed.
+
+	  WARNING:
+	  This fix may influence the sequence of generated random
+	  numbers when a generator of class "rstream.mrg32k3a"
+	  is set as global generator by means of rstream.RNG().
+	  If reproducibility of prior results is important then add
+	  the following statement to your code to revert to the old
+	  behavior:
+
+	     library(rstream)
+	     rstream.version("1.2")
+
+	- added paper in doc directory:
+            P. L'Ecuyer and J. Leydold: 'rstream': Streams of Random
+            Numbers for Stochastic Simulation.
+	    R News 5/2, 16-20, 2005.
+
+	- updated authors email address
+
+
 Version 1.2.5: 2010-05-05
 
 	- fixed bug: loading a packaged rstream object from 
-          an .RData file only did not work unless another new 
+          an .RData file did not work unless another new 
           rstream object was created.
 
-fixed bug when loading a packed rstream object
 
 Version 1.2.4: 2009-11-17
 
 	- fixed syntax of some Rd files
 
+
 Version 1.2.3: 2009-01-08
 
 	- changed copyright notice in file 'RngStreams.c'
           to avoid ambiguity about license (GPL)
+
 
 Version 1.2.2: 2007-09-10
 
@@ -24,19 +52,23 @@ Version 1.2.2: 2007-09-10
 	    . added protector for external pointer
             . avoid nonessential compiler warning with R version 2.6.0
 
+
 Version 1.2.1: 2006-09-21
 
 	- Fixed DESCRIPTION file for upcoming R-2.4.0 release
+
 
 Version 1.2: 2006-02-15
 
 	- Fixed signature of method rstream.sample
 	  (the old one does not work with R Version >=2.3.0)
 
+
 Version 1.1: 2005-10-01
 
 	- Added class "rstream.mrg32k3a" to replace "rstream.lecuyer"
           (suggested by Pierre L'Ecuyer)
+
 
 Version 1.0: 2005-04-02
 
