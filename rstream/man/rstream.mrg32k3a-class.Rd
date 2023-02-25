@@ -118,7 +118,13 @@
   \emph{An object-oriented random-number package with many long streams
     and substreams}. Operations Research 50(6), 1073-1075.
 }
-\author{Josef Leydold (leydold@statistik.wu-wien.ac.at)}
+
+\author{
+  Josef Leydold (leydold@statistik.wu-wien.ac.at)
+
+  underlying generator: Pierre L'Ecyuer and Richard Simard
+}
+
 \note{
   The slots of this class must not be accessed directly. Use
   the above methods instead.
