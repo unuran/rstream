@@ -236,9 +236,9 @@ setReplaceMethod("rstream.packed", "rstream.lecuyer",
                          }
                          else {		# unpack
                                  stream@is.packed <- FALSE
-                                 stream@stream <- .Call("R_RngStreams_SetData",
-                                                        stream@stream, stream@pack$state,
-                                                        stream@pack$name, PACKAGE="rstream")
+                                 .Call("R_RngStreams_SetData", stream,
+                                       stream@stream, stream@pack$state,
+                                       stream@pack$name, PACKAGE="rstream")
                          }
                          stream
                  } )

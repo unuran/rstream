@@ -9,7 +9,7 @@
  *                                                                           *
  *****************************************************************************/
 
-/* $Id: R_RngStreams.h 8 2007-09-06 16:04:35Z leydold $ */
+/* $Id: R_RngStreams.h 9 2007-09-07 07:25:42Z leydold $ */
 
 /*---------------------------------------------------------------------------*/
 
@@ -69,7 +69,7 @@ SEXP R_RngStreams_GetData (SEXP R_stream);
 /* (For the name of the Stream object use R_RngStreams_GetName() ).          */
 /*---------------------------------------------------------------------------*/
 
-SEXP R_RngStreams_SetData (SEXP sexp_stream, SEXP R_stream_data, SEXP R_name);
+SEXP R_RngStreams_SetData (SEXP R_obj, SEXP sexp_stream, SEXP R_stream_data, SEXP R_name);
 /*---------------------------------------------------------------------------*/
 /* Set data structure in Stream object.                                      */
 /*---------------------------------------------------------------------------*/

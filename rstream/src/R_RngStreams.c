@@ -9,7 +9,7 @@
  *                                                                           *
  *****************************************************************************/
 
-/* $Id: R_RngStreams.c 8 2007-09-06 16:04:35Z leydold $ */
+/* $Id: R_RngStreams.c 10 2007-09-10 07:54:34Z leydold $ */
 
 /*---------------------------------------------------------------------------*/
 
@@ -606,14 +606,14 @@ SEXP R_RngStreams_GetData (SEXP R_stream)
 
 /*---------------------------------------------------------------------------*/
 
-SEXP R_RngStreams_SetData (SEXP R_stream, SEXP R_stream_data, SEXP R_name)
+SEXP R_RngStreams_SetData (SEXP R_obj, SEXP R_stream, SEXP R_stream_data, SEXP R_name)
      /*----------------------------------------------------------------------*/
      /* Create and initialize Stream generator object and                    */
      /* set data structure of Stream object.                                 */
      /*                                                                      */
      /* parameters:                                                          */
      /*   obj           ... (S4 class)   ... rstream object                  */ 
-     /*   R_stream       ... (pointer)   ... pointer the Stream object       */
+     /*   R_stream      ... (pointer)    ... pointer the Stream object       */
      /*   R_stream_data ... (double[20]) ... pointer the Stream object       */
      /*   R_name        ... (string)     ... name of the Stream              */
      /*                                                                      */
@@ -660,10 +660,12 @@ SEXP R_RngStreams_SetData (SEXP R_stream, SEXP R_stream_data, SEXP R_name)
 
   /* store pointer to Stream generator in R external pointer */
   R_SetExternalPtrAddr(R_stream, newstream);
-
-/*   /\* return Stream object to R *\/ */
-  return R_stream;
-
+  /* ... and reset the protector just in case R_obj is different from the */
+  /*   orignal protector of R_stream                                      */
+  R_SetExternalPtrProtected(R_stream, R_obj);
+    
+  /* There is no need to return an object to R */
+  return R_NilValue;
 
 } /* end of R_RngStreams_SetData() */
 
