@@ -156,12 +156,12 @@ setReplaceMethod("rstream.incprecision", "rstream.lecuyer",
 
 ## rstream.sample
 ##    make a random sample
-setMethod("rstream.sample", c("rstream.lecuyer","numeric"), 
+setMethod("rstream.sample", "rstream.lecuyer",
           function(stream,n=1) { 
                   if (stream@is.packed) stop("Cannot sample from PACKED Rstream") 
                   .Call("R_RngStreams_Sample", stream@stream, as.integer(n), PACKAGE="rstream") } )
 
-setMethod("r", c("rstream.lecuyer","numeric"), 
+setMethod("r", "rstream.lecuyer",
           function(stream,n=1) { 
                   if (stream@is.packed) stop("Cannot sample from PACKED Rstream") 
                   .Call("R_RngStreams_Sample", stream@stream, as.integer(n), PACKAGE="rstream") } )
