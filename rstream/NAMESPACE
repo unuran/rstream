@@ -1,4 +1,4 @@
-useDynLib(rstream)
+useDynLib(rstream,  .registration=TRUE, .fixes="C_")
 
 importFrom("methods", "is", "new")
 importFrom("methods", "initialize", "show")  ## required for exportMethods() below
