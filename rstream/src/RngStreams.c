@@ -21,6 +21,11 @@
  *             commented out all code that is not required for
  *             R package 'rstream', in particular all printf()
  *             statements.
+ * 2020-02-03  Josef Leydold:
+ *             commented our obsolete code
+ *             RngStream_CreateStream(): 
+ *               added check for NULL after malloc()
+ *               replaced strncpy() by strcpy()
  */
 
 #include "RngStreams.h"
@@ -57,29 +62,29 @@ static double nextSeed[6] = { 12345, 12345, 12345, 12345, 12345, 12345 };
 
 /* The following are the transition matrices of the two MRG components */
 /* (in matrix form), raised to the powers -1, 1, 2^76, and 2^127, resp.*/
-static double InvA1[3][3] = {          /* Inverse of A1p0 */
-          { 184888585.0,   0.0,  1945170933.0 },
-          {         1.0,   0.0,           0.0 },
-          {         0.0,   1.0,           0.0 }
-          };
+/* static double InvA1[3][3] = {          /\* Inverse of A1p0 *\/ */
+/*           { 184888585.0,   0.0,  1945170933.0 }, */
+/*           {         1.0,   0.0,           0.0 }, */
+/*           {         0.0,   1.0,           0.0 } */
+/*           }; */
 
-static double InvA2[3][3] = {          /* Inverse of A2p0 */
-          {      0.0,  360363334.0,  4225571728.0 },
-          {      1.0,          0.0,           0.0 },
-          {      0.0,          1.0,           0.0 }
-          };
+/* static double InvA2[3][3] = {          /\* Inverse of A2p0 *\/ */
+/*           {      0.0,  360363334.0,  4225571728.0 }, */
+/*           {      1.0,          0.0,           0.0 }, */
+/*           {      0.0,          1.0,           0.0 } */
+/*           }; */
 
-static double A1p0[3][3] = {
-          {       0.0,        1.0,       0.0 },
-          {       0.0,        0.0,       1.0 },
-          { -810728.0,  1403580.0,       0.0 }
-          };
+/* static double A1p0[3][3] = { */
+/*           {       0.0,        1.0,       0.0 }, */
+/*           {       0.0,        0.0,       1.0 }, */
+/*           { -810728.0,  1403580.0,       0.0 } */
+/*           }; */
 
-static double A2p0[3][3] = {
-          {        0.0,        1.0,       0.0 },
-          {        0.0,        0.0,       1.0 },
-          { -1370589.0,        0.0,  527612.0 }
-          };
+/* static double A2p0[3][3] = { */
+/*           {        0.0,        1.0,       0.0 }, */
+/*           {        0.0,        0.0,       1.0 }, */
+/*           { -1370589.0,        0.0,  527612.0 } */
+/*           }; */
 
 static double A1p76[3][3] = {
           {      82758667.0, 1871391091.0, 4127413238.0 }, 
@@ -153,72 +158,72 @@ static void MatVecModM (double A[3][3], double s[3], double v[3], double m)
 
 /*-------------------------------------------------------------------------*/
 
-static void MatMatModM (double A[3][3], double B[3][3], double C[3][3],
-                        double m)
-   /* Returns C = A*B % m. Work even if A = C or B = C or A = B = C. */
-{
-   int i, j;
-   double V[3], W[3][3];
-   for (i = 0; i < 3; ++i) {
-      for (j = 0; j < 3; ++j)
-         V[j] = B[j][i];
-      MatVecModM (A, V, V, m);
-      for (j = 0; j < 3; ++j)
-         W[j][i] = V[j];
-   }
-   for (i = 0; i < 3; ++i) {
-      for (j = 0; j < 3; ++j)
-         C[i][j] = W[i][j];
-   }
-}
+/* static void MatMatModM (double A[3][3], double B[3][3], double C[3][3], */
+/*                         double m) */
+/*    /\* Returns C = A*B % m. Work even if A = C or B = C or A = B = C. *\/ */
+/* { */
+/*    int i, j; */
+/*    double V[3], W[3][3]; */
+/*    for (i = 0; i < 3; ++i) { */
+/*       for (j = 0; j < 3; ++j) */
+/*          V[j] = B[j][i]; */
+/*       MatVecModM (A, V, V, m); */
+/*       for (j = 0; j < 3; ++j) */
+/*          W[j][i] = V[j]; */
+/*    } */
+/*    for (i = 0; i < 3; ++i) { */
+/*       for (j = 0; j < 3; ++j) */
+/*          C[i][j] = W[i][j]; */
+/*    } */
+/* } */
 
 
 /*-------------------------------------------------------------------------*/
 
-static void MatTwoPowModM (double A[3][3], double B[3][3], double m, long e)
-  /* Compute matrix B = (A^(2^e) % m);  works even if A = B */
-{
-   int i, j;
+/* static void MatTwoPowModM (double A[3][3], double B[3][3], double m, long e) */
+/*   /\* Compute matrix B = (A^(2^e) % m);  works even if A = B *\/ */
+/* { */
+/*    int i, j; */
 
-   /* initialize: B = A */
-   if (A != B) {
-      for (i = 0; i < 3; i++) {
-         for (j = 0; j < 3; ++j)
-            B[i][j] = A[i][j];
-      }
-   }
-   /* Compute B = A^{2^e} */
-   for (i = 0; i < e; i++)
-      MatMatModM (B, B, B, m);
-}
+/*    /\* initialize: B = A *\/ */
+/*    if (A != B) { */
+/*       for (i = 0; i < 3; i++) { */
+/*          for (j = 0; j < 3; ++j) */
+/*             B[i][j] = A[i][j]; */
+/*       } */
+/*    } */
+/*    /\* Compute B = A^{2^e} *\/ */
+/*    for (i = 0; i < e; i++) */
+/*       MatMatModM (B, B, B, m); */
+/* } */
 
 
 /*-------------------------------------------------------------------------*/
 
-static void MatPowModM (double A[3][3], double B[3][3], double m, long n)
-   /* Compute matrix B = A^n % m ;  works even if A = B */
-{
-   int i, j;
-   double W[3][3];
+/* static void MatPowModM (double A[3][3], double B[3][3], double m, long n) */
+/*    /\* Compute matrix B = A^n % m ;  works even if A = B *\/ */
+/* { */
+/*    int i, j; */
+/*    double W[3][3]; */
 
-   /* initialize: W = A; B = I */
-   for (i = 0; i < 3; i++) {
-      for (j = 0; j < 3; ++j) {
-         W[i][j] = A[i][j];
-         B[i][j] = 0.0;
-      }
-   }
-   for (j = 0; j < 3; ++j)
-      B[j][j] = 1.0;
+/*    /\* initialize: W = A; B = I *\/ */
+/*    for (i = 0; i < 3; i++) { */
+/*       for (j = 0; j < 3; ++j) { */
+/*          W[i][j] = A[i][j]; */
+/*          B[i][j] = 0.0; */
+/*       } */
+/*    } */
+/*    for (j = 0; j < 3; ++j) */
+/*       B[j][j] = 1.0; */
 
-   /* Compute B = A^n % m using the binary decomposition of n */
-   while (n > 0) {
-      if (n % 2)
-         MatMatModM (W, B, B, m);
-      MatMatModM (W, W, W, m);
-      n /= 2;
-   }
-}
+/*    /\* Compute B = A^n % m using the binary decomposition of n *\/ */
+/*    while (n > 0) { */
+/*       if (n % 2) */
+/*          MatMatModM (W, B, B, m); */
+/*       MatMatModM (W, W, W, m); */
+/*       n /= 2; */
+/*    } */
+/* } */
 
 
 /*-------------------------------------------------------------------------*/
@@ -329,7 +334,14 @@ RngStream RngStream_CreateStream (const char name[])
       return NULL;
    }
    g->name = (char *) malloc ((len + 1) * sizeof (char));
-   strncpy (g->name, name, len + 1); 
+   if (g->name == NULL) {
+     free (g);
+     return NULL;
+   }
+   /* GCC >= 8.0 complains about this statement: */
+   /*  strncpy (g->name, name, len + 1); */
+   /* so changed to: */
+   strcpy (g->name, name);
    g->Anti = 0;
    g->IncPrec = 0;
 

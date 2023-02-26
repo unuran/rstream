@@ -1,3 +1,10 @@
+Version 1.3.6: 2020-02-03
+
+	- Internal: RngStream_CreateStream() 
+	   * added check for NULL after malloc()
+           * fixed compiler warning: replaced strncpy() by strcpy()
+	   * commented our obsolete code
+
 
 Version 1.3.5: 2017-06-21
 
