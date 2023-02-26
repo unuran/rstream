@@ -8,7 +8,7 @@
  *                                                                           *
  *****************************************************************************/
 
-/* $Id: R_RNG.c 1 2006-09-24 10:52:21Z leydold $ */
+/* $Id: R_RNG.c 51 2022-10-18 20:57:48Z leydold $ */
 
 /*---------------------------------------------------------------------------*/
 
@@ -29,7 +29,7 @@ static struct rstream_gen current_stream = {NULL, NULL};
 
 /*---------------------------------------------------------------------------*/
 
-double *user_unif_rand ()
+double *user_unif_rand (void)
      /* pointer for user-supplied RNG */
 {
   if (current_stream.sample == NULL) error("Stream not initialized");
