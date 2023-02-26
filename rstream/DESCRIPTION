@@ -8,4 +8,4 @@ Depends: R (>= 2.0.0)
 Imports: methods, stats
 Description: Unified object oriented interface for multiple independent streams of random numbers from different sources.
 License: GPL-2
-URL: http://statmath.wu.ac.at/arvag/
+URL: https://statmath.wu.ac.at/arvag/
