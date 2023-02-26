@@ -1,4 +1,9 @@
 
+Version 1.3.5: 2017-06-21
+
+	- Internal: register native routines
+	
+
 Version 1.3.4: 2015-08-19
 
 	- NAMESPACE: fixed problem with methods "initialize" and "plot".

@@ -59,16 +59,16 @@ setMethod( "initialize", "rstream.lecuyer",
                                "rstream.lecuyer: Set force.seed = TRUE if you really want to reseed.")
                   if (is.null(seed)) seed <- defaultSeed
                   seed <- .rstream.lecuyer.CheckSeed(seed)
-                  .Call("R_RngStreams_SetPackageSeed", as.double(seed), PACKAGE="rstream")
+                  .Call(C_R_RngStreams_SetPackageSeed, as.double(seed))
 
                   ## Create Rstream object
-                  .Object@stream <- .Call("R_RngStreams_Init", .Object, as.character(name), PACKAGE="rstream")
-                  .Call("R_RngStreams_SetAntithetic", .Object@stream, as.integer(antithetic), PACKAGE="rstream")
-                  .Call("R_RngStreams_SetIncreasedPrecis", .Object@stream, as.integer(incprecision), PACKAGE="rstream")
+                  .Object@stream <- .Call(C_R_RngStreams_Init, .Object, as.character(name))
+                  .Call(C_R_RngStreams_SetAntithetic, .Object@stream, as.integer(antithetic))
+                  .Call(C_R_RngStreams_SetIncreasedPrecis, .Object@stream, as.integer(incprecision))
 
                   ## save seed as R variavble
                   assign(".rstream.lecuyer.DefaultSeed",
-                         as.numeric(.Call("R_RngStreams_GetPackageSeed", PACKAGE="rstream")), envir=.rstream.envir)
+                         as.numeric(.Call(C_R_RngStreams_GetPackageSeed)), envir=.rstream.envir)
                   assign(".rstream.lecuyer.HasSeed", TRUE, envir=.rstream.envir)
 
                   ## return new Rstream object
@@ -105,13 +105,13 @@ setMethod("rstream.name", "rstream.lecuyer",
                   if (stream@is.packed) 
                           return (stream@pack$name)
                   else
-                          return (.Call("R_RngStreams_GetName", stream@stream, PACKAGE="rstream")) 
+                          return (.Call(C_R_RngStreams_GetName, stream@stream))
           } )
 
 setReplaceMethod("rstream.name", "rstream.lecuyer", 
                  function(stream, value) {
                          if (stream@is.packed) stop("Cannot change name for PACKED Rstream") 
-                         .Call("R_RngStreams_SetName", stream@stream, as.character(value), PACKAGE="rstream")
+                         .Call(C_R_RngStreams_SetName, stream@stream, as.character(value))
                          stream
                  } )
 
@@ -123,13 +123,13 @@ setMethod("rstream.antithetic", "rstream.lecuyer",
                   if (stream@is.packed) 
                           return (stream@pack$anti)
                   else 
-                          return (as.logical(.Call("R_RngStreams_GetAntithetic", stream@stream, PACKAGE="rstream")))
+                          return (as.logical(.Call(C_R_RngStreams_GetAntithetic, stream@stream)))
           } )
 
 setReplaceMethod("rstream.antithetic", "rstream.lecuyer",
                  function(stream, value) { 
                          if (stream@is.packed) stop("Cannot change antithetic flag for PACKED Rstream") 
-                         .Call("R_RngStreams_SetAntithetic", stream@stream, as.integer(value), PACKAGE="rstream")
+                         .Call(C_R_RngStreams_SetAntithetic, stream@stream, as.integer(value))
                          stream
                  } )
 
@@ -141,13 +141,13 @@ setMethod("rstream.incprecision", "rstream.lecuyer",
                   if (stream@is.packed) 
                           return (stream@pack$incp)
                   else 
-                          return (as.logical(.Call("R_RngStreams_GetIncreasedPrecis", stream@stream, PACKAGE="rstream")))
+                          return (as.logical(.Call(C_R_RngStreams_GetIncreasedPrecis, stream@stream)))
           } )
 
 setReplaceMethod("rstream.incprecision", "rstream.lecuyer",
                  function(stream, value) { 
                          if (stream@is.packed) stop("Cannot change increased precision flag for PACKED Rstream") 
-                         .Call("R_RngStreams_SetIncreasedPrecis", stream@stream, as.integer(value), PACKAGE="rstream")
+                         .Call(C_R_RngStreams_SetIncreasedPrecis, stream@stream, as.integer(value))
                          stream
                  } )
 
@@ -159,12 +159,12 @@ setReplaceMethod("rstream.incprecision", "rstream.lecuyer",
 setMethod("rstream.sample", "rstream.lecuyer",
           function(stream,n=1) { 
                   if (stream@is.packed) stop("Cannot sample from PACKED Rstream") 
-                  .Call("R_RngStreams_Sample", stream@stream, as.integer(n), PACKAGE="rstream") } )
+                  .Call(C_R_RngStreams_Sample, stream@stream, as.integer(n)) } )
 
 setMethod("r", "rstream.lecuyer",
           function(stream,n=1) { 
                   if (stream@is.packed) stop("Cannot sample from PACKED Rstream") 
-                  .Call("R_RngStreams_Sample", stream@stream, as.integer(n), PACKAGE="rstream") } )
+                  .Call(C_R_RngStreams_Sample, stream@stream, as.integer(n)) } )
 
 
 ## Jump methods .............................................................
@@ -176,7 +176,7 @@ if(!isGeneric("rstream.resetsubstream"))
 setMethod("rstream.resetsubstream", "rstream.lecuyer", 
           function(stream) { 
                   if (stream@is.packed) stop("Cannot reset PACKED Rstream") 
-                  dummy <- .Call("R_RngStreams_ResetStartSubstream", stream@stream, PACKAGE="rstream")
+                  dummy <- .Call(C_R_RngStreams_ResetStartSubstream, stream@stream)
           } )
 
 
@@ -187,7 +187,7 @@ if(!isGeneric("rstream.nextsubstream"))
 setMethod("rstream.nextsubstream", "rstream.lecuyer", 
           function(stream) { 
                   if (stream@is.packed) stop("Cannot skip substream of PACKED Rstream") 
-                  dummy <- .Call("R_RngStreams_ResetNextSubstream", stream@stream, PACKAGE="rstream")
+                  dummy <- .Call(C_R_RngStreams_ResetNextSubstream, stream@stream)
           } )
 
 
@@ -198,7 +198,7 @@ setMethod("rstream.nextsubstream", "rstream.lecuyer",
 setMethod("rstream.reset", "rstream.lecuyer", 
           function(stream) { 
                   if (stream@is.packed) stop("Cannot reset PACKED Rstream") 
-                  dummy <- .Call("R_RngStreams_ResetStartStream", stream@stream, PACKAGE="rstream")
+                  dummy <- .Call(C_R_RngStreams_ResetStartStream, stream@stream)
           } )
 
 
@@ -209,7 +209,7 @@ setMethod("rstream.clone", "rstream.lecuyer",
                   if (stream@is.packed) stop("Cannot clone PACKED Rstream") 
                   clone <- stream
                   name <- paste(rstream.name(stream),".",sep="")
-                  clone@stream <- .Call("R_RngStreams_Clone", clone, stream@stream, name, PACKAGE="rstream")
+                  clone@stream <- .Call(C_R_RngStreams_Clone, clone, stream@stream, name)
                   clone
           } )
 
@@ -228,17 +228,16 @@ setReplaceMethod("rstream.packed", "rstream.lecuyer",
                                  incp <- rstream.incprecision(stream)
                                  stream@is.packed <- TRUE
                                  stream@pack <- list()
-                                 stream@pack$state <- as.double(.Call("R_RngStreams_GetData", stream@stream, PACKAGE="rstream"))
+                                 stream@pack$state <- as.double(.Call(C_R_RngStreams_GetData, stream@stream))
                                  stream@pack$name <- name 
                                  stream@pack$anti <- anti
                                  stream@pack$incp <- incp
-                                 .Call("R_RngStreams_Free", stream@stream, PACKAGE="rstream")
+                                 .Call(C_R_RngStreams_Free, stream@stream)
                          }
                          else {		# unpack
                                  stream@is.packed <- FALSE
-                                 .Call("R_RngStreams_SetData", stream,
-                                       stream@stream, stream@pack$state,
-                                       stream@pack$name, PACKAGE="rstream")
+                                 .Call(C_R_RngStreams_SetData, stream,
+                                       stream@stream, stream@pack$state, stream@pack$name)
                          }
                          stream
                  } )
@@ -252,7 +251,7 @@ setMethod( "print", "rstream.lecuyer",
           function(x, ...) { 
                   .rstream.PrintData(x) 
                   if (!x@is.packed) {
-                          state <- .Call("R_RngStreams_GetData", x@stream, PACKAGE="rstream")
+                          state <- .Call(C_R_RngStreams_GetData, x@stream)
                           cat("\n\tInternal state:\n",
                               "\t  initial state:\n",
                               "\t\t", state[13:18], "\n",
@@ -281,12 +280,12 @@ setMethod(".rstream.setRNG", "rstream.lecuyer",
           function(stream) {
             if (isTRUE(get(".rstream.version", envir=.rstream.envir) < 1003)) {
               ## pre 1.3:
-              .Call("R_RngStreams_setRNG", stream@stream, PACKAGE="rstream")
+              .Call(C_R_RngStreams_setRNG, stream@stream)
               RNGkind(kind="user-supplied")
             } else {
               ## new version:
               RNGkind(kind="user-supplied")
-              .Call("R_RngStreams_setRNG", stream@stream, PACKAGE="rstream")
+              .Call(C_R_RngStreams_setRNG, stream@stream)
             }
             stream
           } )
