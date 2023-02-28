@@ -1,7 +1,7 @@
 # rstream (CRAN Package)
 
 R package 
-[*rstream*](https://CRAN.R-project.org/package=rtream)
+[*rstream*](https://CRAN.R-project.org/package=rstream)
 provides a unified object oriented interface for multiple independent
 streams of random numbers from different sources. 
 
