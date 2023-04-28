@@ -1,13 +1,23 @@
 #! /usr/bin/perl
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# Run this script in the top-level Runuran directory.
+# The script updates version and date in
+#   DESCRIPTION
+#   man/Runuran-package.Rd
+# ---------------------------------------------------------------------------
+
 use strict;
 use Getopt::Std;
 
 # --- Constants -------------------------------------------------------------
 
-##my $vignette_file = "./inst/doc/src/version.tex";
-my $package_Rd_file = "./man/rstream-package.Rd";
+## name of R package
+my $package = "rstream";
+
+## package help page
+my $package_Rd_file = "./man/$package-package.Rd";
 
 # --- Usage -----------------------------------------------------------------
 
@@ -19,9 +29,11 @@ sub usage {
 
 usage: $progname -u [-i]
 
-  -u ... update 'rstream-package.Rd'
+  -u ... update '$package_Rd_file'
   -i ... increment version number and update date in 
          file 'DESCRIPTION' first
+
+  This script must be executed in the top level directory of the package!
 
 EOM
 
@@ -40,12 +52,16 @@ usage unless $update;
 # --- Read file 'DESCRIPTION' -----------------------------------------------
 
 open DESC, "DESCRIPTION" 
-    or die "Cannot open file 'DESCRIPTION' for reading: $!";
+    or die "You must run this script in the top-level '$package' directory";
 my $description;
 while (<DESC>) {
     $description .= $_;
 }
 close DESC; 
+
+# check name of package
+die "You must run this script in the top-level '$package' directory"
+    unless $description =~ /^\s*Package:\s+($package)\s*\n/;
 
 # get data
 $description =~ m/^.*\nVersion:\s*(.*?)\s*\n/s 
@@ -90,10 +106,7 @@ print "Date = '$date'  ($longdate)\n";
 
 # --- Update Vignette -------------------------------------------------------
 
-##open VIGNETTE, ">$vignette_file"
-##    or die "Cannot open $vignette_file for writing: $!";
-##print VIGNETTE "\\date{Version $version -- $longdate}\n";
-##close VIGNETTE;
+## Nothing to do here
 
 # --- Update DESCRIPTION ----------------------------------------------------
 
@@ -108,7 +121,7 @@ if ($increment) {
     close DESC;
 }
 
-# --- Update rvgtest-package -------------------------------------------------
+# --- Update rstream package ------------------------------------------------
 
 open PACKAGE, "$package_Rd_file"
     or die "Cannot open file $package_Rd_file for reading: $!";
@@ -119,13 +132,12 @@ while (<PACKAGE>) {
 close PACKAGE; 
 
 $version = sprintf("%-14s", $version); 
-
 $package =~ s/\n(\s*Version:\s*\\tab\s+).*?\\cr\r?\n/\n$1$version\\cr\n/
-	or die "$package_Rd_file: Cannot find field 'Version:'";
+    or die "$package_Rd_file: Cannot find field 'Version:'";
 
 $date = sprintf("%-14s", $date); 
 $package =~ s/\n(\s*Date:\s*\\tab\s+).*?\\cr\r?\n/\n$1$date\\cr\n/
-	or die "$package_Rd_file: Cannot find field 'Date:'";
+    or die "$package_Rd_file: Cannot find field 'Date:'";
 
 open PACKAGE, ">$package_Rd_file"
     or die "Cannot open file $package_Rd_file writing: $!";
