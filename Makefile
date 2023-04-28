@@ -25,7 +25,7 @@ help:
 
 # --- Phony targets ---------------------------------------------------------
 
-.PHONY: help  build check clean devel roxy src valgrind version
+.PHONY: help  build check clean valgrind version
 
 # --- rstream ---------------------------------------------------------------
 
@@ -58,28 +58,3 @@ clean:
 	@find -L . -type f -name "*~" -exec rm -v {} ';'
 
 # --- End -------------------------------------------------------------------
-
-
-
-
-# --- Help (default target) -------------------------------------------------
-
-#help:
-#	@echo ""
-#	@echo "  build    ... build package '${project}'"
-#	@echo "  check    ... check package '${project}' (run 'R CMD check')"
-#	@echo "  "
-#	@echo "  src      ... copy (update) source files from UNU.RAN directory and run autotools"
-#	@echo "  version  ... update version number and release date in documentation"
-#	@echo "  roxy     ... update help pages (roxygenize package)"
-#	@echo ""
-#	@echo "  devel    ... build without vignettes etc (faster)"
-#	@echo "  valgrind ... check package '${project}' using valgrind (very slow!)"
-#	@echo ""
-#	@echo "  clean    ... clear working space"
-#	@echo ""
-
-
-
-# --- Runuran ---------------------------------------------------------------
-
